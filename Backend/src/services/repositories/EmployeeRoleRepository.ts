@@ -1,7 +1,7 @@
 import { Generics } from "../../data";
-import { EmployeeRole } from "../../domain/Entities/EmployeeRole";
+import { EmployeeRoles } from "../../domain/Entities/EmployeeRole";
 
-class EmployeeRoleRepository extends Generics<EmployeeRole>{
+class EmployeeRoleRepository extends Generics<EmployeeRoles>{
 
 }
 export { EmployeeRoleRepository }

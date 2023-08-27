@@ -8,6 +8,14 @@ class typesRolesServices implements ITypesRolesServices{
     constructor(){
         this.typesRolesRepository = new typesRolesRepository();
     }
+    async VerifyTypeRoleNameExists(typeName: string): Promise<boolean> {
+        try{
+            const result = await this.typesRolesRepository.CheckPerProperty(NameTables.TYPESROLES, "typeName", typeName);
+            return result
+        }catch(err){
+            throw new Error(`${err}`)
+        }
+    }
     async GetTypeRoleByTypeName(typeName: string): Promise<typesRoles> {
         let result: any;
         try{

@@ -36,3 +36,4 @@ class Users{
 
     }
 }
+export { Users }

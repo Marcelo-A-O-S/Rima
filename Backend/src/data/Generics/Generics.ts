@@ -17,9 +17,14 @@ export class Generics<T> implements IGenerics<T>{
             }
             const conn = new ConnectionMysql();
             let query = conn.VerifyValueByPropertyExists(tabela,property, valueString);
+            await conn.init();
             const [result]:[any[], any] = await (await conn.connection).query(query);
+            console.log('Query executada no banco de dados: ' + query);
             await conn.close();
-            return result[0];
+            if(result[0].resultado == 'True'){
+                return true
+            }
+            return false
         }catch(err){
             throw new Error(`${err}`)
         }
@@ -30,6 +35,7 @@ export class Generics<T> implements IGenerics<T>{
         await conn.init()
         const [row]:[any[], any] = await (await conn.connection).execute(query)
         await conn.close();
+        console.log('Query executada no banco de dados: ' + query);
         return row[0]
     }
     async findBy( NameTable: string, property: string, value:any): Promise<object> {
@@ -48,6 +54,7 @@ export class Generics<T> implements IGenerics<T>{
             await conn.init();
             const [result]:[any[], any] = await (await conn.connection).query(query);
             await conn.close();
+            console.log('Query executada no banco de dados: ' + query);
             return result[0]
         }catch(err){
             console.error(`${err}`)
@@ -77,9 +84,6 @@ export class Generics<T> implements IGenerics<T>{
             let query = conn.QueryInsert(tabela,colunas,valores);
             await conn.init();
             const [results] = await (await conn.connection).execute(query);
-            console.log('Registro inserido com sucesso!');
-            console.log('Resultado:', results);
-
             await conn.close();
             console.log('Query executada no banco de dados: ' + query);
             return GenericResult.Sucess;
@@ -96,9 +100,8 @@ export class Generics<T> implements IGenerics<T>{
             let query = conn.QuerySelectAll(tabela);
             await conn.init();
             const [rows, fields]: [Array<any>, any] = await (await conn.connection).execute(query);
-            console.log('Resultados:', rows);
-            console.log('Campos:', fields);
             await conn.close();
+            console.log('Query executada no banco de dados: ' + query);
             return rows
         }catch(err){
             console.error(`${err}`);

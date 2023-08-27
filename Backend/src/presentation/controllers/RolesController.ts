@@ -5,7 +5,7 @@ import { IRolesController } from "./interfaces/IRolesController";
 import { IRolesServices } from "../../services";
 import { RolesServices } from "../../services/RolesServices";
 import { createSchema, idSchema, roleNameSchema, updateSchema } from "./Schema/RolesSchema";
-import { Roles } from "../../domain";
+import { Roles } from "../../domain/Entities/Roles";
 
 class RolesController implements IRolesController{
     private rolesServices: IRolesServices;

@@ -95,6 +95,6 @@ export class ConnectionMysql{
         return `Select * from ${tabela} where ${property} = ${value}`
     }
     public VerifyValueByPropertyExists(tabela:string,property:string, value:string):string{
-        return `select case when count(*) > 0 then "true" else "false" end as resultado from ${tabela} where ${property} = ${value};`
+        return `select case when count(*) > 0 then "True" else "False" end as resultado from ${tabela} where ${property} = ${value};`
     }
 }

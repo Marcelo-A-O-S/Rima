@@ -1,5 +1,5 @@
 import { any } from "zod";
-import { Roles } from "../domain";
+import { Roles } from "../domain/Entities/Roles";
 import { NameTables } from "../domain/Enums/NameTables";
 import { IRolesServices } from "./interfaces";
 import { RolesRepository } from "./repositories";
@@ -9,6 +9,13 @@ class RolesServices implements IRolesServices{
     private roleRepository : RolesRepository
     constructor(){
         this.roleRepository = new RolesRepository();
+    }
+    async VerifyRoleNameExists(roleName: string): Promise<boolean> {
+        const result = await this.roleRepository.CheckPerProperty(NameTables.ROLES, "roleName", roleName);
+        if(result == true){
+            return true
+        }
+        return false
     }
     async GetRoleByRoleName(roleName: string): Promise<Roles> {
         let result: any;

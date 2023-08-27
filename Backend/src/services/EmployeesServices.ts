@@ -26,6 +26,10 @@ class EmployeesServices implements IEmployeesServices{
             result = await this.employeesRepository.findBy(NameTables.EMPLOYEE, 'email', email);
             if(result !== undefined){
                 const employee = new Employees();
+                employee.id = result.id;
+                employee.email = result.email;
+                employee.firstName = result.firstName;
+                employee.lastName = result.lastName;
                 return employee
             }
             return result

@@ -1,4 +1,4 @@
-class EmployeeRole{
+class EmployeeRoles{
     id: number;
     employeeid:number;
     roleid:number;
@@ -8,4 +8,4 @@ class EmployeeRole{
         this.roleid = 0
     }
 }
-export { EmployeeRole }
+export { EmployeeRoles }

@@ -1,7 +1,7 @@
-import { EmployeeRole } from "../../domain/Entities/EmployeeRole";
+import { EmployeeRoles } from "../../domain/Entities/EmployeeRole";
 import { IServices } from "./IServices";
 
-interface IEmployeeRoleServices extends IServices<EmployeeRole>{
+interface IEmployeeRoleServices extends IServices<EmployeeRoles>{
 
 }
 export { IEmployeeRoleServices }
