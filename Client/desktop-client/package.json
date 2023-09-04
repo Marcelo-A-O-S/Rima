@@ -2,6 +2,12 @@
   "name": "desktop-client",
   "version": "0.1.0",
   "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
+  "author": {
+    "email": "marceloaugustooliveirasoares@gmail.com",
+    "name": "Marcelo Augusto de Oliveira Soares"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -19,8 +25,22 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:desktop": "tsc -p electron/tsconfig.json",
+    "start:desktop": "npm run build:desktop && electron ./build/electron.js",
+    "electron:package:win": "npm run build && npm run build:desktop && electron-builder -w -c.extraMetadata.main=build/electron.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "build": {
+    "appId": "com.example.electron",
+    "productName": "Gerenciamento Rima",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "public"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +61,9 @@
     ]
   },
   "devDependencies": {
+    "electron": "^26.1.0",
+    "electron-builder": "^24.6.3",
+    "electron-is-dev": "^2.0.0",
     "react-router-dom": "^6.15.0"
   }
 }
