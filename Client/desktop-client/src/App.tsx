@@ -1,11 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Rotas from './Routes/Rotas';
 
 function App() {
   return (
-    <img src={logo}/>
+    <Rotas/>
   );
 }
+
 
 export default App;
