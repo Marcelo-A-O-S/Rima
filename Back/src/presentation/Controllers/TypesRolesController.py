@@ -5,7 +5,7 @@ from domain.Entities.typesRoles import typesRoles
 typesroles_route = Blueprint('TypesRolesController',__name__)
 
 
-@typesroles_route.route('/typesroles',methods = ['GET'])
+@typesroles_route.route('/typesroles/',methods = ['GET'])
 async def GetAll():
     typeRolesServices = typesRolesServices();
     ListTypeRoles = await typeRolesServices.GetAll();
@@ -16,6 +16,8 @@ async def GetAll():
 async def Create():
     typeRolesServices = typesRolesServices();
     data = json.dumps(request.data);
-    typeRole = typesRoles(0, data['typeName'])
-    result = await typeRolesServices.Save(typeRole)
+    typeRole = typesRoles(0, data['typeName']);
+    result = await typeRolesServices.Save(typeRole);
 
+async def GetBytypeName():
+    data = json.dumps(request.data);

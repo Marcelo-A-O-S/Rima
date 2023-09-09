@@ -5,4 +5,4 @@ class Tables(Enum):
     EMPLOYEEROLES = 'employeeroles';
     ROLES = 'roles';
     TYPESROLES = 'typesroles';
-    USERS = 'users'
+    USERS = 'users';

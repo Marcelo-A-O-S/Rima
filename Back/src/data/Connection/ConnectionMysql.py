@@ -5,7 +5,7 @@ class ConnectionMysql:
     host:str = 'localhost';
     user:str = 'root';
     password:str = '123456';
-    database:str = 'Base';
+    database:str = 'databasemysql';
     cursor:any;
     def __init__(self) -> None:
         self.connection = connect(
@@ -71,18 +71,26 @@ class ConnectionMysql:
     async def execute(self, query:str):
         self.cursor.execute(query);
         #self.connection.commit();
-
+    async def executeAndCommit(self, query:str):
+        self.cursor.execute(query);
+        self.connection.commit();
     async def close(self):
         self.cursor.close();
         self.connection.close();
 
-    async def QuerySelectAll(self, tabela:str)-> str:
+    def QuerySelectAll(self, tabela:str)-> str:
         return 'select * from {}'.format(tabela);
-    async def QueryInsert(self, tabela:str ,colunas:str,values:str)->str:
+    def QueryInsert(self, tabela:str ,colunas:str,values:str)->str:
         return "insert into {} ({}) values({});".format(tabela,colunas.rstrip(colunas[-1]),values.rstrip(values[-1]));
-    async def QueryUpdate(self, tabela, corpo,referencia):
+    def QueryUpdate(self, tabela, corpo,referencia):
         return 'update {} set {} where {}'.format(tabela, corpo.rstrip(corpo[-1]), referencia)
-    async def QueryFindById(self, tabela, id):
+    def QueryFindById(self, tabela, id):
         return "select * from {} where id={} limit 1;".format(tabela, id);
-    async def QueryDeleteById(self,tabela,id):
-        return "delete from {} where id= {}".format(tabela, id)
+    def QueryDeleteById(self,tabela,id):
+        return "delete from {} where id= {}".format(tabela, id);
+    def QuerySelecById(self, tabela, id):
+        return 'select * from {} where id= {};'.format(tabela,id);
+    def QuerySelectByProperty(self,tabela, property, value):
+        return 'Select * from {} where {} = {};'.format(tabela, property, value);
+    def VerifyValueByPropertyExists(self,tabela:str, property:str,  value:str):
+        return 'select case when count(*) > 0 then "True" else "False" end as resultado from {} where {} = {};'.format(tabela, property, value);

@@ -1,5 +1,5 @@
 from enum import Enum
 
 class EtypesRoles(Enum):
-    OPERACIONAL = 'Operacional',
-    ADIMINISTRATIVA = 'Administrativa'
+    OPERACIONAL = 'Operacional';
+    ADIMINISTRATIVA = 'Administrativa';

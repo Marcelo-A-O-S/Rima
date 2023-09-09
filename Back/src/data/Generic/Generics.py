@@ -35,7 +35,7 @@ class BaseGenerics:
                 else:
                     values += "{},".format(valores[i]);
             query = conn.QueryInsert(tabela, colunas, values);
-            await conn.execute(query);
+            await conn.executeAndCommit(query);
             await conn.close();
             return "Inserido no banco com sucesso"
         except Error as e:
@@ -87,7 +87,7 @@ class BaseGenerics:
 
             referencia = '{} = {}'.format(identificador, valor_identificador)
             query = conn.QueryUpdate(tabela,corpo,referencia);
-            await conn.execute(query);
+            await conn.executeAndCommit(query);
             await conn.close();
         except Error as e:
             print("Erro no banco de dados:", e.msg)
@@ -113,9 +113,52 @@ class BaseGenerics:
     async def Delete(self, tabela:str, id:int)-> T:
         try:
             conn = ConnectionMysql();
-            conn.init();
+            await conn.init();
             query = conn.QueryDeleteById(tabela, id);
-            conn.execute(query);
-            conn.close();
+            await conn.executeAndCommit(query);
+            await conn.close();
         except Error as err:
             return err;
+    async def CheckPerProperty(self, tabela: str, property:str, value:any):
+        try:
+            value_param: str;
+            if(type(value) == str):
+                value_param = '"{}"'.format(value);
+            elif type(value) == int:
+                value_param = '{}'.format(value);
+            elif type(value) == float:
+                value_param = '{}'.format(value);
+            conn = ConnectionMysql();
+            await conn.init();
+            query = conn.VerifyValueByPropertyExists(tabela, property, value_param);
+            await conn.execute(query);
+            resultado = conn.cursor.fetchall();
+            await conn.close();
+            for item in resultado:
+                if item['resultado'] == 'True':
+                    return True
+                return False
+
+
+        except Error as err:
+            print(err);
+    async def FindBy(self, tabela:str, property:str, value:any):
+        try:
+            value_param: str;
+            if(type(value) == str):
+                value_param = '"{}"'.format(value);
+            elif type(value) == int:
+                value_param = '{}'.format(value);
+            elif type(value) == float:
+                value_param = '{}'.format(value);
+            conn = ConnectionMysql();
+            await conn.init();
+            query = conn.QuerySelectByProperty(tabela, property, value_param);
+            await conn.execute(query);
+            resultado = conn.cursor.fetchall();
+            await conn.close();
+            for item in resultado:
+                return item
+
+        except Error as err:
+            print(err)
