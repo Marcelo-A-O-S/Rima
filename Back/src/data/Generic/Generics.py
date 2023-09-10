@@ -40,23 +40,16 @@ class BaseGenerics:
             return "Inserido no banco com sucesso"
         except Error as e:
             print("Erro no banco de dados:", e.msg)
-    async def List(self, tabela:str)->List[T]:
+    async def List(self, tabela:str):
         try:
+            lista: list = [];
             conn = ConnectionMysql();
             await conn.init();
-            value:T
-            ListGeneric : List[T] = []
             query = conn.QuerySelectAll(tabela);
             await conn.execute(query);
             lista = conn.cursor.fetchall()
             await conn.close();
-            propriedades =  [propriedade for propriedade in vars(value)]
-            for linha in lista:
-                for prop in propriedades:
-                    setattr(value, prop, linha[prop])
-                ListGeneric.append(value)
-
-            return ListGeneric
+            return lista
 
         except Error as err:
             print("Erro no banco de dados:", err.msg)

@@ -3,7 +3,7 @@ from services.RolesServices import RolesServices;
 from services.UsersServices import UsersServices;
 from services.EmployeeRolesServices import EmployeeRolesServices;
 from domain.Entities.Employees import Employees;
-from domain.Entities.EmployeeRoles import EmployeRoles;
+from domain.Entities.EmployeeRoles import EmployeeRoles;
 from domain.Entities.Users import Users;
 from domain.Enums.ERoles import ERoles
 
@@ -19,8 +19,8 @@ async def InitializeUsersAdmin():
         await employeeservices.Save(employeeAdmin);
         employeeAdmin = await employeeservices.GetByEmail("administrador@admin.com");
         role = await roleservices.GetRoleByRoleName(ERoles.ADMIN.value);
-        employeerole = EmployeRoles(0,employeeAdmin.id,role.id);
+        employeerole = EmployeeRoles(0,employeeAdmin.id,role.id);
         await emrolesservices.Save(employeerole);
         user = Users(0, employeeAdmin.id);
-        user.createPasswordHash('123456');
+        await user.createPasswordHash('123456');
         await userservices.Save(user);

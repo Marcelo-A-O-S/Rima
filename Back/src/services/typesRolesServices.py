@@ -18,11 +18,14 @@ class typesRolesServices:
 
     async def GetAll(self):
         try:
-            list = await self.typesRolesRepository.List(Tables.TYPESROLES.value);
-            if(list.count > 0):
-                for item in list:
-                    print(item);
-            return list
+            listTypeRole:list[typesRoles] = [];
+            lista = await self.typesRolesRepository.List(Tables.TYPESROLES.value);
+            if(lista.__len__() > 0):
+                for item in lista:
+                    typeRole = typesRoles(item['id'], item['typeName'])
+                    listTypeRole.append(typeRole);
+                return listTypeRole;
+            return lista
         except Exception as e:
             print("Error: ",e )
 

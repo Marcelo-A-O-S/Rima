@@ -1,5 +1,5 @@
 from flask import Flask
-
+from presentation.Controllers.TypesRolesController import typesRolesController
 class App:
     def __init__(self) -> None:
         self.app = Flask(__name__)
@@ -7,6 +7,7 @@ class App:
         self.init();
 
     def Routes(self):
+        self.app.register_blueprint(typesRolesController)
         return
 
     def init(self):

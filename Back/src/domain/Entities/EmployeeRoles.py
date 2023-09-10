@@ -1,4 +1,4 @@
-class EmployeRoles:
+class EmployeeRoles:
     id:int;
     employeeid:int;
     roleid:int;
