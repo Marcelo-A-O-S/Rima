@@ -94,3 +94,5 @@ class ConnectionMysql:
         return 'Select * from {} where {} = {};'.format(tabela, property, value);
     def VerifyValueByPropertyExists(self,tabela:str, property:str,  value:str):
         return 'select case when count(*) > 0 then "True" else "False" end as resultado from {} where {} = {};'.format(tabela, property, value);
+    def VerifyEntity(self,tabela, valores):
+        return 'select case when count(*) > 0 then "True" else "False" end as resultado from {} where {};'.format(tabela, valores)

@@ -51,3 +51,22 @@ class typesRolesServices:
             return "Tipo de função deletada com Sucesso!";
         except Exception as e:
             print("Error: ", e);
+
+    async def VerifyTypeRoleExistsById(self, id):
+        try:
+            result = await self.typesRolesRepository.CheckPerProperty(Tables.TYPESROLES.value, 'id', id);
+            return result;
+        except Exception as ex:
+            print("Error: ", ex)
+
+    async def GetById(self, id: int ):
+        try:
+            busca = await self.typesRolesRepository.FindById(Tables.TYPESROLES.value, id);
+            if busca != None:
+                for item in busca:
+                    typerole = typesRoles(item['id'], item['typeName']);
+                    return typerole;
+            else:
+                return None;
+        except Exception as ex:
+            print("Error: ",ex)

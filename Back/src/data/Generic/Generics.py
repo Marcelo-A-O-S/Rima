@@ -84,23 +84,15 @@ class BaseGenerics:
             await conn.close();
         except Error as e:
             print("Erro no banco de dados:", e.msg)
-    async def FindById(self, tabela:str, id:int)-> T:
+    async def FindById(self, tabela:str, id:int):
         try:
-            conn = ConnectionMysql()
-            conn.init()
-            value:T;
-            propriedades = [propriedade for propriedade in vars(value)];
+            conn = ConnectionMysql();
+            conn.init();
             query = conn.QueryFindById(tabela, id);
             conn.execute(query);
             busca = conn.cursor.fetchall();
             conn.close();
-            if busca.__len__() > 0:
-                for valor in busca:
-                    for prop in propriedades:
-                        setattr(value, prop, valor[prop])
-                return value
-            else:
-                return None
+            return busca;
         except Error as err:
             return err;
     async def Delete(self, tabela:str, id:int)-> T:
@@ -155,3 +147,33 @@ class BaseGenerics:
 
         except Error as err:
             print(err)
+    async def CheckExistsEntity(self, value: T):
+        try:
+            tabela = value.__class__.__name__.lower();
+            id_column = "";
+            other_column = "";
+            propriedades = [propriedade for propriedade in vars(value)]
+            for prop in propriedades:
+                if prop.lower() == "id":
+                    id_column = ' {} = {}'.format(prop, getattr(value,prop))
+                else:
+                    value_column = getattr(value, prop);
+                    if type(value_column) == str:
+                        other_column += ' and {} = "{}"'.format(prop, value_column);
+                    else:
+                        other_column += ' and {} = {}'.format(prop, value_column);
+            values = '{} {}'.format(id_column, other_column);
+            conn = ConnectionMysql();
+            await conn.init();
+            query = conn.VerifyEntity(tabela, values);
+            await conn.execute(query);
+            resultado = conn.cursor.fetchall();
+            await conn.close();
+            for item in resultado:
+                if item['resultado'] == "True":
+                    return True;
+                else:
+                    return False;
+            return False;
+        except Error as err:
+            print(err);

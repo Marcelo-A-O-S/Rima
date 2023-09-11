@@ -39,3 +39,22 @@ class RolesServices:
             return "Deletado com sucesso!"
         except Exception as e:
             print(e)
+    async def GetAll(self):
+        try:
+            listRoles:list[Roles]= []
+            lista = await self.rolesRepository.List(Tables.ROLES.value);
+            if lista.__len__() > 0:
+                for item in lista:
+                    role = Roles(item['id'],item['roleName'],item['typeid']);
+                    listRoles.append(role);
+                return listRoles;
+            return listRoles;
+        except Exception as ex:
+            print(ex)
+
+    async def CheckExistsRole(self, role: Roles):
+        try:
+            check = await self.rolesRepository.CheckExistsEntity(role);
+            return check;
+        except Exception as ex:
+            print(ex);
