@@ -54,7 +54,14 @@ class RolesServices:
 
     async def CheckExistsRole(self, role: Roles):
         try:
-            check = await self.rolesRepository.CheckExistsEntity(role);
+            check = await self.rolesRepository.CheckExistsEntityWithId(role);
             return check;
+        except Exception as ex:
+            print(ex);
+
+    async def CheckPropertyRoleExists(self, role:Roles):
+        try:
+            exists = await self.rolesRepository.CheckExistsEntity(role);
+            return exists;
         except Exception as ex:
             print(ex);

@@ -114,3 +114,9 @@ async def GetById():
 
 async def Update():
     return
+@typesRolesController.route('/typesroles/teste')
+async def Teste():
+    services = typesRolesServices();
+    typerole = typesRoles(0,'Operacional');
+    exists = await services.CheckPropertyTypeRoleExists(typerole);
+    return jsonify(exists);

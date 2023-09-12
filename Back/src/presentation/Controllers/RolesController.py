@@ -65,3 +65,11 @@ async def Update():
 
 async def GetById():
     return
+
+
+@rolesController.route('/roles/teste')
+async def Teste():
+    services = RolesServices();
+    role = Roles(0,'Gestor(a)',2);
+    exists = await services.CheckPropertyRoleExists(role);
+    return jsonify(exists);

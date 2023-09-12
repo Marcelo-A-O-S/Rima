@@ -147,7 +147,7 @@ class BaseGenerics:
 
         except Error as err:
             print(err)
-    async def CheckExistsEntity(self, value: T):
+    async def CheckExistsEntityWithId(self, value: T):
         try:
             tabela = value.__class__.__name__.lower();
             id_column = "";
@@ -177,3 +177,32 @@ class BaseGenerics:
             return False;
         except Error as err:
             print(err);
+    async def CheckExistsEntity(self, value:T):
+        try:
+            tabela = value.__class__.__name__.lower();
+            referencies = "";
+            propriedades = [propriedade for propriedade in vars(value)];
+            for prop in propriedades:
+                if prop.lower() != "id":
+                    value_column = getattr(value, prop);
+                    if type(value_column) == str:
+                        referencies += ' {} = "{}",'.format(prop, getattr(value,prop));
+                    else:
+                        referencies += ' {} = {},'.format(prop, getattr(value,prop));
+            referencies = referencies.rstrip(referencies[-1]);
+            referencies = referencies.replace(',',' and');
+            conn = ConnectionMysql();
+            await conn.init();
+            query = conn.VerifyValueByPropertiesExists(tabela,referencies)
+            await conn.execute(query);
+            resultado = conn.cursor.fetchall();
+            await conn.close();
+            for item in resultado:
+                if item['resultado'] == "True":
+                    return True;
+                else:
+                    return False;
+            return False;
+
+        except Error as err:
+            print(err)
