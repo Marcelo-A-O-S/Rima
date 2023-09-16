@@ -70,8 +70,12 @@ class typesRolesServices:
                 return None;
         except Exception as ex:
             print("Error: ",ex)
-    async def CheckTypeRoleExists(self):
-        return
+    async def CheckTypeRoleExists(self, typerole: typesRoles):
+        try:
+            exists = await self.typesRolesRepository.CheckExistsEntityWithId(typerole);
+            return exists;
+        except Exception as ex:
+            print("Error: ",ex)
 
     async def CheckPropertyTypeRoleExists(self,typeRole: typesRoles):
         try:

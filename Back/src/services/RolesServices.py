@@ -22,7 +22,16 @@ class RolesServices:
         if result == True:
             return True;
         return False;
-
+    async def GetById(self, id: int):
+        try:
+            busca = await self.rolesRepository.FindById(Tables.ROLES.value,id);
+            if busca != None:
+                for item in busca:
+                    role = Roles(item['id'], item['roleName'], item['typeid']);
+                return role
+            return busca;
+        except Exception as ex:
+            print("Error :",ex);
     async def GetRoleByRoleName(self, roleName: str):
         try:
             result: any;
