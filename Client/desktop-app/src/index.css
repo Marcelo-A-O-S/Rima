@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  height: 100vh;
 }
 
 .dark{
@@ -10,4 +11,9 @@ body {
 .light{
   background-color: white;
   color: green;
+
+}
+main{
+  margin: 0px;
+  height: 100vh;
 }

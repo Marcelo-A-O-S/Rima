@@ -1,0 +1,153 @@
+.navigation{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    background-color: inherit;
+    border-style: solid;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 100%;
+    height: 75px;
+
+}
+.link_name{
+    color:inherit;
+    font-size: 20px;
+    text-decoration: none;
+}
+.user_name{
+    color:inherit;
+    font-size: 20px;
+    text-decoration: none;
+}
+.header{
+    border-color: currentColor;
+    border-bottom: 20px;
+}
+.Logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding-right: 15%;
+
+}
+.Logo_title{
+    color:inherit;
+    font-size: 30px;
+    text-decoration: none;
+}
+.Hamburguer{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 15%;
+    cursor: pointer;
+}
+.Hamburguer.Open .line.line1 {
+    transform: translateY(100%) rotate(45deg) scale(1);
+
+}
+.Hamburguer.Open .line.line2 {
+    transform: translateY(-110%) rotate(-45deg) scale(1);
+
+}
+.Hamburguer.Open .line.line3 {
+    display: none;
+
+}
+.line1{
+
+}
+.line2{
+
+}
+.line3{
+
+}
+
+.line{
+    display:block;
+    height: 4px;
+    width: 20px;
+    background-color: currentColor;
+  }
+.Logo_img{
+    width: 105px;
+    height: 61px;
+    flex-shrink: 0;
+}
+.Menu{
+    list-style: none;
+    display: none;
+    padding: 0;
+    padding-left: 60px;
+    padding-top: 10px;
+}
+.Menu_dropdown{
+    position: fixed;
+    top:0;
+    margin-top:0px;
+    display: flex;
+    flex-direction: column;
+    background-color: inherit;
+    width: 20%;
+    height: 100vh;
+    border-style: solid;
+    border-bottom: 0px;
+    border-top: 0px;
+    border-left: 0px;
+    padding-left: 0px;
+}
+.menu_item{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+    width: 100%;
+    height: 64px;
+
+}
+.menu_item:hover{
+    background-color: aqua;
+    cursor: pointer;
+}
+.icon{
+    color: inherit;
+    background-color: inherit;
+    height: 30px;
+    width: 30px;
+}
+.button_dropdown{
+    border: none;
+    color: inherit;
+    background-color: inherit;
+    cursor: pointer;
+}
+.item_dropdown{
+    display: flex;
+    height: 64px;
+    align-items: center;
+    width: 100%;
+    gap:5px;
+    justify-content: center;
+}
+.item_dropdown:hover{
+    background-color: aqua;
+}
+.dropdown{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.perfil{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap:10px;
+    padding-left: 15%;
+}

@@ -87,11 +87,11 @@ class BaseGenerics:
     async def FindById(self, tabela:str, id:int):
         try:
             conn = ConnectionMysql();
-            conn.init();
+            await conn.init();
             query = conn.QueryFindById(tabela, id);
-            conn.execute(query);
+            await conn.execute(query);
             busca = conn.cursor.fetchall();
-            conn.close();
+            await conn.close();
             return busca;
         except Error as err:
             return err;
@@ -147,6 +147,25 @@ class BaseGenerics:
 
         except Error as err:
             print(err)
+    async def FindAllBy(self, tabela:str, property:str, value:any):
+        try:
+            lista : list = []
+            value_param: str;
+            if(type(value) == str):
+                value_param = '"{}"'.format(value);
+            elif type(value) == int:
+                value_param = '{}'.format(value);
+            elif type(value) == float:
+                value_param = '{}'.format(value);
+            conn = ConnectionMysql();
+            await conn.init();
+            query = conn.QuerySelectByProperty(tabela, property, value_param);
+            await conn.execute(query);
+            lista = conn.cursor.fetchall();
+            await conn.close();
+            return lista;
+        except Error as err:
+            print(err);
     async def CheckExistsEntityWithId(self, value: T):
         try:
             tabela = value.__class__.__name__.lower();

@@ -1,9 +1,13 @@
+from services.EmployeesServices import EmployeesServices;
+from services.RolesServices import RolesServices;
 from services.Repositories.EmployeeRolesRepository import EmployeeRolesRepository;
 from domain.Entities.EmployeeRoles import EmployeeRoles;
 from domain.Enums.Tables import Tables
 class EmployeeRolesServices:
     def __init__(self) -> None:
         self.emploRolesRepository = EmployeeRolesRepository();
+        self.employeeServices = EmployeesServices();
+        self.rolesServices = RolesServices();
 
     async def Save(self, entity: EmployeeRoles):
         try:
@@ -45,3 +49,17 @@ class EmployeeRolesServices:
                 return lista;
         except Exception as ex:
             print("Error: ", ex);
+    async def GetAllByEmployeeId(self, employeeid:int):
+        try:
+            listEmploRoles : list[EmployeeRoles] = [];
+            lista = await self.emploRolesRepository.FindAllBy(Tables.EMPLOYEEROLES.value, 'employeeid', employeeid);
+            if lista.__len__() > 0:
+                for item in lista:
+                    emploroles = EmployeeRoles(item['id'],item['employeeid'],item['roleid']);
+                    listEmploRoles.append(emploroles);
+                return listEmploRoles;
+            else:
+                return lista;
+        except Exception as ex:
+            print("Error: ", ex);
+

@@ -49,3 +49,21 @@ class UsersServices:
                 return None;
         except Exception as ex:
             print("Error: ", ex);
+    async def GetByEmployeeId(self, employeeid: int):
+        try:
+            result = await self.usersRepository.FindBy(Tables.USERS.value, 'employeeid', employeeid);
+            if result != None:
+                user = Users(result['id'], result['employeeid']);
+                user.passwordHash = result['passwordHash'];
+                user.passwordSalt = result['passwordSalt'];
+                return user;
+            else:
+                return None;
+        except Exception as ex:
+            print("Error: ",ex)
+    async def VerifyExistsByEmployeeId(self, employeeid: int):
+        try:
+            check = await self.usersRepository.CheckPerProperty(Tables.USERS.value, 'employeeid', employeeid);
+            return check;
+        except Exception as ex:
+            print("Error: ",ex)
