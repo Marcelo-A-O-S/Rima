@@ -1,153 +1,113 @@
 .navigation{
     display: flex;
-    flex-direction: row;
-    align-content: center;
-    align-items: center;
-    justify-content: space-between;
+    height: 70px;
+    width: 100%;
     background-color: inherit;
-    border-style: solid;
+    color:inherit;
+    border-bottom: 5px;
     border-top: 0px;
     border-left: 0px;
     border-right: 0px;
-    width: 100%;
-    height: 75px;
-
-}
-.link_name{
-    color:inherit;
-    font-size: 20px;
-    text-decoration: none;
-}
-.user_name{
-    color:inherit;
-    font-size: 20px;
-    text-decoration: none;
-}
-.header{
-    border-color: currentColor;
-    border-bottom: 20px;
-}
-.Logo{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding-right: 15%;
-
-}
-.Logo_title{
-    color:inherit;
-    font-size: 30px;
-    text-decoration: none;
-}
-.Hamburguer{
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding-left: 15%;
-    cursor: pointer;
-}
-.Hamburguer.Open .line.line1 {
-    transform: translateY(100%) rotate(45deg) scale(1);
-
-}
-.Hamburguer.Open .line.line2 {
-    transform: translateY(-110%) rotate(-45deg) scale(1);
-
-}
-.Hamburguer.Open .line.line3 {
-    display: none;
-
-}
-.line1{
-
-}
-.line2{
-
-}
-.line3{
-
-}
-
-.line{
-    display:block;
-    height: 4px;
-    width: 20px;
-    background-color: currentColor;
-  }
-.Logo_img{
-    width: 105px;
-    height: 61px;
-    flex-shrink: 0;
-}
-.Menu{
-    list-style: none;
-    display: none;
-    padding: 0;
-    padding-left: 60px;
-    padding-top: 10px;
-}
-.Menu_dropdown{
-    position: fixed;
-    top:0;
-    margin-top:0px;
-    display: flex;
-    flex-direction: column;
-    background-color: inherit;
-    width: 20%;
-    height: 100vh;
     border-style: solid;
-    border-bottom: 0px;
-    border-top: 0px;
-    border-left: 0px;
-    padding-left: 0px;
+    border-color: inherit;
 }
-.menu_item{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    gap:10px;
+.list_item{
+    display: none;
+    flex-direction: column;
+    border-style: solid;
     width: 100%;
-    height: 64px;
+    border-right: 0px;
+}
+.logo{
+    height: 40px;
+}
+/* Css Hamburguer*/
+input[type="checkbox"]{
+    display:none
+}
+.line.burguer1{
+    rotate: 45deg;
+}
+.line.burguer2{
+    display:none;
+}
+.line.burguer3{
+    rotate: -45deg;
+}
+.check{
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+    padding: 20px;
+    position:fixed;
+    z-index: 1;
+    top:0;
+}
+.check>.line{
+    background-color: rgb(89, 88, 88);
+    height: 6px;
+    width: 25px;
+    border-radius: 5px;
+}
+/**/
+/*Menu dropdown*/
+.menu_drop{
+    height: 100%;
+    width: 20%;
+    position:fixed;
+    border-style: solid;
+    background-color: inherit;
+    display: none;
+    align-items: center
+}
+.open{
+    display: flex;
+}
+.itens_menu_drop{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
 
 }
-.menu_item:hover{
-    background-color: aqua;
-    cursor: pointer;
-}
-.icon{
-    color: inherit;
-    background-color: inherit;
-    height: 30px;
-    width: 30px;
-}
-.button_dropdown{
-    border: none;
-    color: inherit;
-    background-color: inherit;
-    cursor: pointer;
-}
-.item_dropdown{
+.item_menu_drop{
     display: flex;
-    height: 64px;
-    align-items: center;
-    width: 100%;
-    gap:5px;
-    justify-content: center;
-}
-.item_dropdown:hover{
-    background-color: aqua;
-}
-.dropdown{
-    display:flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
+
+
 }
-.perfil{
-    display:flex;
-    flex-direction: row;
+
+li .link{
+    color: inherit;
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    align-items: center
+}
+li .link:hover{
+    background-color: aqua;
+    cursor:pointer;
+}
+li .link .icon{
+    height: 40px;
+    fill: green;
+}
+li .link .textlink{
+    color: inherit;
+    font-size: 15px;
+}
+/**/
+.header{
+
+
+}
+
+.menu{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
     align-items: center;
-    gap:10px;
-    padding-left: 15%;
 }
+

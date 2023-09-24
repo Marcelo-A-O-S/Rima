@@ -8,6 +8,10 @@ import Header from '../Components/Header'
 import Dashboard from '../Pages/Signed/Dashboard'
 import { AuthProvider } from '../Context/AuthContext'
 import About from '../Pages/Signed/About'
+import Configuration from '../Pages/Signed/Configuration'
+import RegisterEmployee from '../Pages/Signed/Funcionarios/Create'
+import ListEmployee from '../Pages/Signed/Funcionarios/List'
+
 
 export default function Rotas() {
   return (
@@ -29,6 +33,11 @@ export default function Rotas() {
                 <Route path='dashboard' element={<Dashboard/>}/>
                 <Route path= 'about' element={<About/>}/>
                 <Route path='*' element={<Dashboard/>}/>
+                <Route path="configuration" element={<Configuration/>}/>
+                <Route path="funcionarios" >
+                    <Route index element={<ListEmployee/>}/>
+                    <Route path='create' element={<RegisterEmployee/>}/>
+                </Route>
               </Route>
           </Routes>
         </AuthProvider>

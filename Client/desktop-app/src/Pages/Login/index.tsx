@@ -7,8 +7,10 @@ import { User } from '../../Models/User'
 import { Roles } from '../../Models/Roles'
 import AuthContext from '../../Context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { ThemeDarkContext } from '../../Context/ThemeContext'
 export default function Login() {
   const user = new User();
+  const {themeCurrent} = useContext(ThemeDarkContext)
   const { SignIn} = useContext(AuthContext);
   const navigate = useNavigate();
   const [login, setLogin ] = useState<LoginView>({
@@ -68,7 +70,8 @@ export default function Login() {
   }
 
   return (
-    <div className={Style.login}>
+    <main className={themeCurrent}>
+      <div className={Style.login}>
       <img src={Logo} alt={"Rima"} />
       <label className={Style.login_label_title}>Rima Industrial</label>
       <form onSubmit={(e)=>SubmitLogin(e)} className={Style.login_form}>
@@ -94,5 +97,6 @@ export default function Login() {
       </form>
       <ButtonTheme/>
     </div>
+    </main>
   )
 }

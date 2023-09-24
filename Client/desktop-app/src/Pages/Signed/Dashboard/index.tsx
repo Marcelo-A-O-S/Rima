@@ -7,8 +7,8 @@ export default function Dashboard(){
     const {themeCurrent } = useContext(ThemeDarkContext)
     const { user } = useContext(AuthContext)
     return(
-    <main className={`${themeCurrent}`}>
-        <div>
+    <main className={`${Style.main} ${themeCurrent}`}>
+        <div >
             <h4 className={Style.title}>Olá {user?.roles[0].roleName}  {user?.firstName} {user?.lastName}!</h4>
         </div>
     </main>)
