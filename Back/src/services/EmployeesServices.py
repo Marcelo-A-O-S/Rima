@@ -29,7 +29,8 @@ class EmployeesServices:
             lista = await self.employeesRepository.List(Tables.EMPLOYEES.value);
             if lista.__len__() > 0:
                 for item in lista:
-                    employee = Employees(item['id'], item['firstName'], item['lastName'], item['email']);
+                    employee = Employees(item['id'], item['firstName'], item['lastName']);
+                    await employee.SetCode(item['code']);
                     listEmployees.append(employee);
                 return listEmployees;
             return lista;
@@ -42,29 +43,26 @@ class EmployeesServices:
             busca = await self.employeesRepository.FindById(Tables.EMPLOYEES.value,id);
             if busca != None:
                 for item in busca:
-                    employee = Employees(item['id'], item['firstName'], item['lastName'], item['email'])
+                    employee = Employees(item['id'], item['firstName'], item['lastName']);
+                    await employee.SetCode(item['code']);
                 return employee;
             return busca;
         except Exception as ex:
             print("Error: ", ex)
         return
-    async def VerifyEmailExists(self,email:str):
+    async def GetByCode(self, code:str):
         try:
-            result = await self.employeesRepository.CheckPerProperty(Tables.EMPLOYEES.value, 'email', email);
-            return result;
-        except Exception as e:
-            print(e);
-    async def GetByEmail(self, email):
-        try:
-            result = await self.employeesRepository.FindBy(Tables.EMPLOYEES.value,'email',email);
+            result = await self.employeesRepository.FindBy(Tables.EMPLOYEES.value, 'code', code);
             if result != None:
-                employee = Employees(result['id'], result['firstName'], result['lastName'], result['email']);
+                employee = Employees(result['id'], result['firstName'], result['lastName']);
+                await employee.SetCode(result['code']);
                 return employee;
-            return None;
-        except Exception as e:
-            print(e);
+            return result;
+        except Exception as ex:
+            print("Error: ", ex);
     async def CheckEmployeeExists(self):
         return
 
     async def CheckPropertiesEmployeeExists(self):
         return
+

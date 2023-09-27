@@ -1,0 +1,12 @@
+.inputText{
+    border-radius: 8px;
+    height: 20px;
+    width: 250px;
+    padding-left: 2%;
+    border-color: var(currentColor);
+}
+.inputLabel{
+}
+.input{
+    padding: 8px;
+}

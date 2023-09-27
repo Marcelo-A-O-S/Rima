@@ -1,0 +1,37 @@
+.link{
+    display:flex;
+    cursor: pointer;
+    align-items: center;
+    gap:10px;
+    color:inherit;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+}
+.link:hover{
+    background-color: aqua;
+}
+.list_item.open{
+    display: flex;
+}
+.link .textlink{
+    display: none;
+    font-size: 16px;
+    font-weight: 400;
+}
+.link .textlink.activate{
+    display:block;
+}
+.list_item{
+    display: none;
+    flex-direction: column;
+    border-style: solid;
+    width: 100%;
+    border-right: 0px;
+
+
+}
+.icon{
+    height: 30px;
+    width: 30px;
+}

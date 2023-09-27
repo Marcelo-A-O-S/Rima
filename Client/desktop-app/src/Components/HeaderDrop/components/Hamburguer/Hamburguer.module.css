@@ -1,0 +1,21 @@
+.main{
+    display:flex;
+    flex-direction: column;
+    cursor:pointer;
+}
+.input{
+    display: none;
+}
+.line{
+    display:flex;
+    height: 4px;
+    width: 25px;
+    background-color: currentColor;
+
+}
+.hamburguer{
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    cursor:pointer
+}

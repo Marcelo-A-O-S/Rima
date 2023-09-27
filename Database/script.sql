@@ -6,11 +6,13 @@ drop database databasemysql;
 
 create table if not exists employees(
 id int primary key auto_increment not null,
+code varchar(255)  not null,
 firstName varchar(50) not null,
-lastName varchar(50) not null,
-email varchar(60) not null
+lastName varchar(50) not null
 );
-create table if not exists employees(id int primary key auto_increment not null,firstName varchar(50) not null,lastName varchar(50) not null,email varchar(60) not null);
+
+create table if not exists employees(id int primary key auto_increment not null, code varchar(255) not null, firstName varchar(50) not null,lastName varchar(50) not null);
+
 create table if not exists typesRoles(
 id int primary key auto_increment not null,
 typeName varchar(50) not null
@@ -29,11 +31,13 @@ drop database databasemysql;
 create table if not exists users(
 id int primary key auto_increment not null,
 employeeid int not null,
+email varchar(60) not null,
 passwordHash varchar(255) not null,
 passwordSalt varchar(70) not null,
 foreign key(employeeid) references databasemysql.employees(id) on update cascade on delete cascade
 );
-create table if not exists users(id int primary key auto_increment not null,employeeid int not null,passwordHash varchar(255) not null,passwordSalt varchar(70) not null,foreign key(employeeid) references databasemysql.employee(id) on update cascade on delete cascade);
+
+create table if not exists users(id int primary key auto_increment not null,employeeid int not null,email varchar(60) not null,passwordHash varchar(255) not null,passwordSalt varchar(70) not null,foreign key(employeeid) references databasemysql.employees(id) on update cascade on delete cascade)
 
 create table if not exists employeeRoles(
 id int primary key auto_increment not null,

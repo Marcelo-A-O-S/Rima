@@ -1,0 +1,6 @@
+.main{
+    display:flex;
+    padding-left: 1%;
+    gap: 20px;
+    align-items: center;
+}

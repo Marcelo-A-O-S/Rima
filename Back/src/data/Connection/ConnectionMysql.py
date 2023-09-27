@@ -50,10 +50,10 @@ class ConnectionMysql:
         try:
             #await self.close();
             await self.init();
-            await self.execute("create table if not exists employees(id int primary key auto_increment not null,firstName varchar(50) not null,lastName varchar(50) not null,email varchar(60) not null);");
-            await self.execute("create table if not exists typesRoles(id int primary key auto_increment not null,typeName varchar(50) not null);");
-            await self.execute("create table if not exists roles(id int primary key auto_increment not null,roleName varchar(50) not null,typeid int not null,foreign key(typeid) references databasemysql.typesRoles(id) on update cascade on delete cascade);")
-            await self.execute("create table if not exists users(id int primary key auto_increment not null,employeeid int not null,passwordHash varchar(255) not null,passwordSalt varchar(70) not null,foreign key(employeeid) references databasemysql.employees(id) on update cascade on delete cascade);")
+            await self.execute("create table if not exists employees(id int primary key auto_increment not null, code varchar(255) not null, firstName varchar(50) not null,lastName varchar(50) not null);");
+            await self.execute("create table if not exists typesroles(id int primary key auto_increment not null,typeName varchar(50) not null);");
+            await self.execute("create table if not exists roles(id int primary key auto_increment not null,roleName varchar(50) not null,typeid int not null,foreign key(typeid) references databasemysql.typesroles(id) on update cascade on delete cascade);")
+            await self.execute("create table if not exists users(id int primary key auto_increment not null,employeeid int not null,email varchar(60) not null,passwordHash varchar(255) not null,passwordSalt varchar(70) not null,foreign key(employeeid) references databasemysql.employees(id) on update cascade on delete cascade);")
             await self.execute("create table if not exists employeeRoles(id int primary key auto_increment not null,employeeid int not null,roleid int not null,foreign key(employeeid) references databasemysql.employees(id) on update cascade on delete cascade,foreign key(roleid) references databasemysql.roles(id) on update cascade on delete cascade);")
         except Error as e:
             print("Erro no banco de dados: ", e.msg)

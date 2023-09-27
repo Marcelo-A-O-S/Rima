@@ -30,29 +30,26 @@ async def Login():
                 roleservices = RolesServices();
                 emploroleservices = EmployeeRolesServices();
                 check:bool;
-                exists = await emploservices.VerifyEmailExists(data['email']);
+                exists = await userservices.VerifyEmailExists(data['email']);
                 if exists != False:
-                    employee = await emploservices.GetByEmail(data['email']);
-                    check = await userservices.VerifyExistsByEmployeeId(employee.id);
+                    user = await userservices.GetByEmail(data['email']);
+                    employee = await emploservices.GetById(user.employeeid);
+                    check = await user.verifyPasswordHash(data['password']);
                     if check != False:
-                        user = await userservices.GetByEmployeeId(employee.id);
-                        check = await user.verifyPasswordHash(data['password']);
-                        if check != False:
                             lista = await emploroleservices.GetAllByEmployeeId(employee.id);
                             if lista.__len__() > 0:
                                 for item in lista:
                                     role : Roles = await roleservices.GetById(item.roleid);
                                     userview.roles.append(role);
-                                userview.email = employee.email;
+                                userview.email = user.email;
                                 userview.firstName = employee.firstName;
                                 userview.lastName = employee.lastName;
                                 return jsonify(userview.as_dict());
                             else:
                                 return jsonify("Não Autorizado"),401;
-                        else:
-                            return jsonify('Credenciais informadas estão incorretas'),401;
                     else:
-                        return jsonify('Não encontrado'), 401;
+                        return jsonify('Credenciais informadas estão incorretas'),401;
+
                 else:
                     return jsonify('Não Autorizado'),401;
             else:

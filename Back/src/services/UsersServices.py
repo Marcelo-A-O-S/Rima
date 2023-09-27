@@ -29,7 +29,7 @@ class UsersServices:
             result = await self.usersRepository.List(Tables.USERS.value);
             if result.__len__() > 0:
                 for item in result:
-                    user = Users(item['id'], item['employeeid'])
+                    user = Users(item['id'], item['employeeid'], item['email'])
                     user.passwordHash = item['passwordHash'];
                     user.passwordSalt = item['passwordSalt'];
                     listUsers.append(user);
@@ -41,7 +41,7 @@ class UsersServices:
             busca = await self.usersRepository.FindById(Tables.USERS.value, id);
             if busca != None:
                 for item in busca:
-                    user = Users(item['id'], item['employeeid']);
+                    user = Users(item['id'], item['employeeid'], item['email']);
                     user.passwordHash = item['passwordHash'];
                     user.passwordSalt = item['passwordSalt'];
                 return user;
@@ -53,7 +53,7 @@ class UsersServices:
         try:
             result = await self.usersRepository.FindBy(Tables.USERS.value, 'employeeid', employeeid);
             if result != None:
-                user = Users(result['id'], result['employeeid']);
+                user = Users(result['id'], result['employeeid'], result['email']);
                 user.passwordHash = result['passwordHash'];
                 user.passwordSalt = result['passwordSalt'];
                 return user;
@@ -67,3 +67,20 @@ class UsersServices:
             return check;
         except Exception as ex:
             print("Error: ",ex)
+    async def VerifyEmailExists(self,email:str):
+        try:
+            result = await self.usersRepository.CheckPerProperty(Tables.USERS.value, 'email', email);
+            return result;
+        except Exception as e:
+            print(e);
+    async def GetByEmail(self, email):
+        try:
+            result = await self.usersRepository.FindBy(Tables.USERS.value, 'email', email);
+            if result != None:
+                user = Users(result['id'], result['employeeid'], result['email']);
+                user.passwordHash = result['passwordHash'];
+                user.passwordSalt = result['passwordSalt'];
+                return user;
+            return None;
+        except Exception as e:
+            print(e);

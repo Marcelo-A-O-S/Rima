@@ -8,7 +8,7 @@ interface AuthUser {
     signed: boolean,
     SignIn(BodyUser:object): Promise<void>,
     VerificarUsuario(): void,
-    SignOut():void
+    SignOut():Promise<void>
 }
 
 
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }: any) => {
         localStorage.setItem("user", JSON.stringify(BodyUser))
 
     }
-    async function SignOut(){
+    async function SignOut(): Promise<void>{
         setUser(null);
         setSigned(false);
         localStorage.removeItem("user")

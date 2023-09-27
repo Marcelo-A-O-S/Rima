@@ -5,9 +5,11 @@ class Users:
     employeeid:int;
     passwordHash:str;
     passwordSalt:str;
-    def __init__(self, _id, _employeeid):
+    email:str;
+    def __init__(self, _id, _employeeid, _email):
         self.id = _id;
         self.employeeid = _employeeid;
+        self.email = _email;
 
     async def createPasswordHash(self, password):
         await self.createPasswordSalt();

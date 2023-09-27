@@ -1,6 +1,6 @@
 .navigation{
-    display: flex;
-    height: 70px;
+    display: none;
+    height: 60px;
     width: 100%;
     background-color: inherit;
     color:inherit;
@@ -10,6 +10,7 @@
     border-right: 0px;
     border-style: solid;
     border-color: inherit;
+    position: fixed;
 }
 .list_item{
     display: none;

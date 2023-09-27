@@ -1,0 +1,11 @@
+.select{
+    border-style: solid;
+    border-color: black;
+    border-radius:12px;
+
+}
+.main{
+    display:flex;
+    align-items: center;
+    gap: 5px;
+}
