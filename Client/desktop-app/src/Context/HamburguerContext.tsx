@@ -11,9 +11,6 @@ const HamburguerContext = createContext<IHamburguer>({} as IHamburguer)
 
 export const HamburguerProvider = ({children}:IHamburguerContext) =>{
     const [ham, setHam] = useState(false);
-    useEffect(()=>{
-        console.log(ham)
-    },[ham])
     return(
         <HamburguerContext.Provider
         value={{

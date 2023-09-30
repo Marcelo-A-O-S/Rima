@@ -6,7 +6,8 @@ interface IBox{
     vertical?:boolean,
     center?:boolean,
     border?:boolean,
-    padding?: TypesPadding
+    padding?: TypesPadding,
+    expand?:boolean
 }
 
 export default function Box(props:IBox){
@@ -24,15 +25,15 @@ export default function Box(props:IBox){
                 setSizePadding(Style.small)
             }
             if(props.padding === "medium"){
-                setSizePadding(Style.small)
+                setSizePadding(Style.medium)
             }
             if(props.padding === "large"){
-                setSizePadding(Style.small)
+                setSizePadding(Style.large)
             }
         }
     }
     return(
-        <div className={`${props.vertical?Style.vertical:Style.horizontal} ${props.border?Style.border:""} ${sizePadding}`}>
+        <div className={`${props.expand?Style.expand:""} ${props.vertical?Style.vertical:Style.horizontal}  ${props.border?Style.border:""} ${sizePadding}`}>
             {props.children}
         </div>
     )

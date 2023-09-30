@@ -12,6 +12,7 @@ import Configuration from '../Pages/Signed/Configuration'
 import RegisterEmployee from '../Pages/Signed/Funcionarios/Create'
 import ListEmployee from '../Pages/Signed/Funcionarios/List'
 import { HamburguerProvider } from '../Context/HamburguerContext'
+import { BellProvider } from '../Context/BellContext'
 
 export default function Rotas() {
   return (
@@ -19,7 +20,8 @@ export default function Rotas() {
       <ThemeProvider >
         <AuthProvider>
           <HamburguerProvider>
-          <Routes>
+            <BellProvider>
+            <Routes>
               <Route path="/" element={<Home />}>
                   <Route index element={<Login />} />
                   <Route path='' element={<Login />} />
@@ -40,6 +42,7 @@ export default function Rotas() {
                 </Route>
               </Route>
           </Routes>
+            </BellProvider>
           </HamburguerProvider>
         </AuthProvider>
       </ThemeProvider>

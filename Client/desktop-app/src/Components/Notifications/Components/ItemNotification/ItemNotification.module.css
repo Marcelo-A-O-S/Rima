@@ -1,0 +1,14 @@
+.main{
+    display: flex;
+    border-style: solid;
+    border-radius: 12px;
+    flex-direction: column;
+    position: relative;
+    gap: 3px;
+}
+.message{
+    padding: 12px;
+}
+.actions{
+    padding: 12px;
+}

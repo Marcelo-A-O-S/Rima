@@ -30,12 +30,8 @@ export default function RegisterEmployee(){
         })
     },[])
     useEffect(()=>{
-        console.log(create);
     },[create])
     useEffect(()=>{
-        console.log(selectValue);
-        console.log(selectValue.length)
-
         if(selectValue.length > 0){
             const novoRoles = selectValue.map((item: any) => {
                 if(item.value.typeid === 2){
@@ -52,11 +48,14 @@ export default function RegisterEmployee(){
             setEnableUser(true)
         }
     },[selectValue])
+    async function Register(){
+
+    }
     return(
         <main className={`${Style.main} ${themeCurrent}`}>
             <Form vertical={false} border={true}>
-                <Box vertical={false} border={true}>
-                    <Box vertical={true} border={false}>
+                <Box vertical={false} border={true} expand={true} padding="small">
+                    <Box vertical={true} border={false} expand={true}>
                     <InputText
                     name="Nome: "
                     placeholder="Digite aqui o nome"
@@ -83,7 +82,7 @@ export default function RegisterEmployee(){
                     onChange={setSelectValue}
                     placeholder="Selecione as funções do funcionário"/>
                     </Box>
-                    <Box vertical={true} border={false}>
+                    <Box vertical={true} border={false} expand={true}>
                     <InputText
                         name="Email: "
                         placeholder="Digite aqui o email"
@@ -106,14 +105,17 @@ export default function RegisterEmployee(){
                         element="password"
                         disabled={enableUser}
                     />
+                    <Box padding="medium" expand={true} border={false}>
+                        <button>Update</ button>
+                        <button onClick={Register}>Registrar</ button>
+                    </Box>
                     </Box>
                 </Box>
             </Form>
-            <Box vertical={true} border={true} padding="small">
-                <label htmlFor="">teste</label>
-                <label htmlFor="">teste</label>
-                <label htmlFor="">teste</label>
-                <label htmlFor="">teste</label>
+            <Box vertical={true} border={true} padding="medium">
+                <Box vertical={true} border={true} padding="none">
+
+                </Box>
             </Box>
         </main>
     )

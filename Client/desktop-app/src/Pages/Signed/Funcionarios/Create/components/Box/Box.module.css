@@ -1,13 +1,13 @@
 div.vertical{
     display: flex;
     flex-direction: column;
-    width: 100%;
+
     position: relative;
 
 }
 div.horizontal{
     display:flex;
-    width: 100%;
+
     position: relative;
 }
 div.border{
@@ -15,9 +15,15 @@ div.border{
     border-color: inherit;
     border-radius: 12px;
 }
+.expand{
+    width: 100%;
+}
 .small{
     padding: 10px;
 }
 .medium{
     padding: 20px;
+}
+.large{
+    padding:30px;
 }
