@@ -1,8 +1,0 @@
-export interface PropsEmployee {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    passwordHash:string ;
-    passwordSalt:string
-}

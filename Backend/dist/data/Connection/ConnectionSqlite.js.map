@@ -1,1 +1,0 @@
-{"version":3,"file":"ConnectionSqlite.js","sourceRoot":"","sources":["../../../src/data/Connection/ConnectionSqlite.ts"],"names":[],"mappings":";;;AAGA,MAAa,gBAAgB;IACzB,sBAAsB;IACtB,sBAAsB;IACtB;QACI,IAAI,CAAC,IAAI,EAAE,CAAA;IACf,CAAC;IACM,IAAI;QACP,4BAA4B;IAChC,CAAC;CACJ;AATD,4CASC"}
