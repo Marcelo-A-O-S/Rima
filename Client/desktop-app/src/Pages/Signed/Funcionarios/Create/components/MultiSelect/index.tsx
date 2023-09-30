@@ -3,17 +3,30 @@ import AsyncSelect  from "react-select/async"
 import Style from "./MultiSelect.module.css"
 interface IMultiSelect{
     name:string,
-    placeholder:string
+    placeholder:string,
+    options?:any[],
+    value?:any,
+    onChange?(newValue:any): void,
+    loadOptions?():Promise<any[]>
 }
 
 export default function MultiSelect(props: IMultiSelect){
+
     return(
         <div className={Style.main}>
             <label htmlFor={props.name}>{props.name}</label>
-            <AsyncSelect
+            <Select
             className={Style.select}
             placeholder={props.placeholder}
-            id={props.name}/>
+            options={props.options}
+            id={props.name}
+            value={props.value}
+            onChange={(value) => {
+                if(props.onChange !== undefined){
+                    props.onChange(value)
+                }
+            }}
+            isMulti/>
         </div>
     )
 }

@@ -1,0 +1,23 @@
+div.vertical{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+
+}
+div.horizontal{
+    display:flex;
+    width: 100%;
+    position: relative;
+}
+div.border{
+    border-style: solid;
+    border-color: inherit;
+    border-radius: 12px;
+}
+.small{
+    padding: 10px;
+}
+.medium{
+    padding: 20px;
+}

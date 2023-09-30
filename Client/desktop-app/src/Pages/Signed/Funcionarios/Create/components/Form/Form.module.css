@@ -1,7 +1,12 @@
 .form{
     display: flex;
-    flex-direction: column;
+    padding: 20px;
+}
+
+.border{
     border-style: solid;
     border-radius: 12px;
-    padding: 20px;
+}
+.vertical{
+    flex-direction: column;
 }

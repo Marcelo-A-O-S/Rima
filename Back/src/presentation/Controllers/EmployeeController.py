@@ -15,3 +15,12 @@ async def Create():
 @employeeController.route('/employee/delete', methods = ['POST'])
 async def Delete():
     return
+
+@employeeController.route('/employee/register', methods= ['POST'])
+async def EmployeeRegister():
+    try:
+        data = json.loads(request.data);
+        console.log(data);
+        return jsonify("teste");
+    except Exception as ex:
+        return jsonify(ex), 500;

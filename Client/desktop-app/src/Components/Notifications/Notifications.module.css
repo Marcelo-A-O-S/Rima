@@ -1,0 +1,10 @@
+.notification{
+    height: 100vh;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    top:45px;
+    position: relative;
+    border-color: currentColor;
+    border-style: solid;
+}
