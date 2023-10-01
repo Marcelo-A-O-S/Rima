@@ -1,5 +1,6 @@
 ﻿using Bussines.Repository;
 using Bussines.Repository.IRepository;
+using Bussines.Services.IServices;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Bussines.Services
 {
-    public class TypesRolesServices 
+    public class TypesRolesServices : ITypesRolesServices
     {
         private readonly TypesRolesRepository typesRolesRepository;
 

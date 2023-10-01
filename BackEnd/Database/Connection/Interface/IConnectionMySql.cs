@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Database.Connection.Interface
 {
-    public interface IConnection
+    public interface IConnectionMySql
     {
         Task VerifyDatabaseExists();
-        
+        Task Init();
     }
 }

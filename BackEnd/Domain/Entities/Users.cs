@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Domain.Entities
 {
     public class Users
     {
+        [Key]
         public int id { get; set; }
         public int employeeid { get; set; }
         public string passwordHash { get; set; }

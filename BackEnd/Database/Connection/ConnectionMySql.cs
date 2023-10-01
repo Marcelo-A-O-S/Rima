@@ -1,7 +1,9 @@
 ﻿using Database.Connection.Interface;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Text;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Database.Connection
 {
-    public class Connection : IConnection
+    public class ConnectionMySql : IConnectionMySql
     {
         private MySqlConnection connection { get; set; }
         private MySqlCommand command { get; set; }
@@ -18,15 +20,14 @@ namespace Database.Connection
         private string password { get; set; }
         private string database { get; set; } = "databasemysql";
 
-        public Connection()
+        public ConnectionMySql()
         {
 
         }
-        public void Init()
+        public async Task Init()
         {
-            using (var connection = new MySqlConnection()){
-
-            }
+            this.connection = new MySqlConnection($"Server=localhost;Database={this.database};Uid=root;Pwd=123456;");
+            await this.connection.OpenAsync();
         }
         public async Task VerifyDatabaseExists()
         {
@@ -42,8 +43,6 @@ namespace Database.Connection
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine(reader.GetString(0));
-                            Console.WriteLine(reader["resultado"]);
                             if (reader["resultado"].ToString() == "false")
                             {
                                 reader.Close();
@@ -131,6 +130,43 @@ namespace Database.Connection
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+        public async Task InsertCommand(string command)
+        {
+            this.command = new MySqlCommand(command, this.connection);
+        }
+        public async Task ExecuteReaderQuery()
+        { 
+            await this.command.ExecuteReaderAsync();
+        }
+        public async Task ExecuteScalarQuery()
+        {
+            await this.command.ExecuteScalarAsync();
+        }
+        public async Task ExecuteNonQuery()
+        {
+            await this.command.ExecuteNonQueryAsync();
+        }
+        public async Task CommandClose()
+        {
+            await this.command.DisposeAsync();
+        }
+        public async Task ConnectClose()
+        {
+            await this.connection.CloseAsync();
+        }
+        public string QueryInsert(string table, List<string> fields, List<string> values)
+        {
+            var commandText = "insert into {0} ({1}) values({2});";
+            return String.Format(commandText, table.ToLower(), String.Join(",", fields.ToArray()), String.Join(",", values.ToArray()));
+        }
+        public async Task ReaderReturnExecuteQuery(object entity)
+        {
+            var properties = entity.GetType().GetProperties();
+            foreach(var item in properties)
+            {
+                Console.WriteLine(item.Name);
             }
         }
     }

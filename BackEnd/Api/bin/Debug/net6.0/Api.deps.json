@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "Api/1.0.0": {
         "dependencies": {
+          "Bussines": "1.0.0",
           "Database": "1.0.0",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
@@ -387,12 +388,26 @@
           }
         }
       },
+      "Bussines/1.0.0": {
+        "dependencies": {
+          "Database": "1.0.0",
+          "Domain": "1.0.0"
+        },
+        "runtime": {
+          "Bussines.dll": {}
+        }
+      },
       "Database/1.0.0": {
         "dependencies": {
           "MySql.Data": "8.1.0"
         },
         "runtime": {
           "Database.dll": {}
+        }
+      },
+      "Domain/1.0.0": {
+        "runtime": {
+          "Domain.dll": {}
         }
       }
     }
@@ -669,7 +684,17 @@
       "path": "zstdsharp.port/0.7.1",
       "hashPath": "zstdsharp.port.0.7.1.nupkg.sha512"
     },
+    "Bussines/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Database/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

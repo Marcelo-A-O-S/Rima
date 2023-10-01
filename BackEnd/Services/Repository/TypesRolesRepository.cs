@@ -5,7 +5,7 @@ using Domain.Entities;
 
 namespace Bussines.Repository
 {
-    public class TypesRolesRepository : Generics<TypesRoles>, ITypesRolesRepository
+    public class TypesRolesRepository : Generics<TypesRoles>
     {
     }
 }

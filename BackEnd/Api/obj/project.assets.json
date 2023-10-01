@@ -630,6 +630,20 @@
           "lib/net6.0/ZstdSharp.dll": {}
         }
       },
+      "Bussines/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Database": "1.0.0",
+          "Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Bussines.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Bussines.dll": {}
+        }
+      },
       "Database/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -641,6 +655,16 @@
         },
         "runtime": {
           "bin/placeholder/Database.dll": {}
+        }
+      },
+      "Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Domain.dll": {}
         }
       }
     }
@@ -2003,14 +2027,25 @@
         "zstdsharp.port.nuspec"
       ]
     },
+    "Bussines/1.0.0": {
+      "type": "project",
+      "path": "../Services/Bussines.csproj",
+      "msbuildProject": "../Services/Bussines.csproj"
+    },
     "Database/1.0.0": {
       "type": "project",
       "path": "../Database/Database.csproj",
       "msbuildProject": "../Database/Database.csproj"
+    },
+    "Domain/1.0.0": {
+      "type": "project",
+      "path": "../Domain/Domain.csproj",
+      "msbuildProject": "../Domain/Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Bussines >= 1.0.0",
       "Database >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
@@ -2050,6 +2085,9 @@
           "projectReferences": {
             "C:\\Rima\\BackEnd\\Database\\Database.csproj": {
               "projectPath": "C:\\Rima\\BackEnd\\Database\\Database.csproj"
+            },
+            "C:\\Rima\\BackEnd\\Services\\Bussines.csproj": {
+              "projectPath": "C:\\Rima\\BackEnd\\Services\\Bussines.csproj"
             }
           }
         }

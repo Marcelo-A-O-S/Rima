@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Enums
 {
-    public class Tables
+    public enum Tables
     {
-        public string EMPLOYEES = "employees";
-        public string EMPLOYEEROLES = "employeeroles";
-        public string ROLES = "roles";
-        public string TYPESROLES = "typesroles";
-        public string USERS = "users";
+        EMPLOYEES,
+        EMPLOYEEROLES,
+        ROLES,
+        TYPESROLES,
+        USERS
     }
 }
