@@ -1,0 +1,12 @@
+C:\Rima\BackEnd\Database\bin\Debug\net6.0\Database.deps.json
+C:\Rima\BackEnd\Database\bin\Debug\net6.0\Database.dll
+C:\Rima\BackEnd\Database\bin\Debug\net6.0\Database.pdb
+C:\Rima\BackEnd\Database\obj\Debug\net6.0\Database.csproj.AssemblyReference.cache
+C:\Rima\BackEnd\Database\obj\Debug\net6.0\Database.GeneratedMSBuildEditorConfig.editorconfig
+C:\Rima\BackEnd\Database\obj\Debug\net6.0\Database.AssemblyInfoInputs.cache
+C:\Rima\BackEnd\Database\obj\Debug\net6.0\Database.AssemblyInfo.cs
+C:\Rima\BackEnd\Database\obj\Debug\net6.0\Database.csproj.CoreCompileInputs.cache
+C:\Rima\BackEnd\Database\obj\Debug\net6.0\Database.dll
+C:\Rima\BackEnd\Database\obj\Debug\net6.0\refint\Database.dll
+C:\Rima\BackEnd\Database\obj\Debug\net6.0\Database.pdb
+C:\Rima\BackEnd\Database\obj\Debug\net6.0\ref\Database.dll
