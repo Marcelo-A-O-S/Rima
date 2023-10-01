@@ -1,13 +1,8 @@
 ﻿using Database.Connection.Interface;
+
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Database.Connection
 {
@@ -15,6 +10,7 @@ namespace Database.Connection
     {
         private MySqlConnection connection { get; set; }
         private MySqlCommand command { get; set; }
+        private DbDataReader reader { get; set; }
         private string host { get; set; }
         private string user { get; set; }
         private string password { get; set; }
@@ -106,7 +102,7 @@ namespace Database.Connection
                     "create table if not exists employees(id int primary key auto_increment not null, code varchar(255) not null, firstName varchar(50) not null,lastName varchar(50) not null);",
                     "create table if not exists typesroles(id int primary key auto_increment not null,typeName varchar(50) not null);",
                     "create table if not exists roles(id int primary key auto_increment not null,roleName varchar(50) not null,typeid int not null,foreign key(typeid) references databasemysql.typesroles(id) on update cascade on delete cascade);",
-                    "create table if not exists users(id int primary key auto_increment not null,employeeid int not null,email varchar(60) not null,passwordHash varchar(255) not null,passwordSalt varchar(70) not null,foreign key(employeeid) references databasemysql.employees(id) on update cascade on delete cascade);",
+                    "create table if not exists users(id int primary key auto_increment not null,employeeid int not null,email varchar(60) not null,passwordHash varchar(255) not null,passwordSalt varchar(255) not null,foreign key(employeeid) references databasemysql.employees(id) on update cascade on delete cascade);",
                     "create table if not exists employeeRoles(id int primary key auto_increment not null,employeeid int not null,roleid int not null,foreign key(employeeid) references databasemysql.employees(id) on update cascade on delete cascade,foreign key(roleid) references databasemysql.roles(id) on update cascade on delete cascade);"
                 };
                 foreach (var query in querys)
@@ -138,7 +134,7 @@ namespace Database.Connection
         }
         public async Task ExecuteReaderQuery()
         { 
-            await this.command.ExecuteReaderAsync();
+            this.reader = await this.command.ExecuteReaderAsync();
         }
         public async Task ExecuteScalarQuery()
         {
@@ -161,6 +157,11 @@ namespace Database.Connection
             var commandText = "insert into {0} ({1}) values({2});";
             return String.Format(commandText, table.ToLower(), String.Join(",", fields.ToArray()), String.Join(",", values.ToArray()));
         }
+        public string QueryCheckValueExists(string table, string propertyName, string value)
+        {
+            var commandText = "SELECT case when count(*) > 0 then 'true' else 'false' end as resultado FROM {0} where {1} like '%{2}%';";
+            return String.Format(commandText, table.ToLower(), propertyName, value);
+        }
         public async Task ReaderReturnExecuteQuery(object entity)
         {
             var properties = entity.GetType().GetProperties();
@@ -168,6 +169,46 @@ namespace Database.Connection
             {
                 Console.WriteLine(item.Name);
             }
+        }
+
+        public async Task<string> ReturnUniqueReaderData()
+        {
+            var result = "";
+            while(await this.reader.ReadAsync())
+            {
+                result = this.reader.GetString(0);
+                return result; 
+            }
+            return result;
+        }
+        public string QuerySelectAll(string Table)
+        {
+            return String.Format("Select * from {0};", Table);
+        }
+        public string QuerySelectByProperty(string Table, string property, string value)
+        {
+            return String.Format("Select * from {0} where {1} = {2};",Table,property,value);
+        }
+        public Task ReturnListOfReaderData()
+        {
+
+            throw new NotImplementedException();
+        }
+
+        public async Task<T> FilterReaderObject<T>()
+        {
+            Type type = typeof(T);
+
+            var obj = (T)Activator.CreateInstance(type);
+            while(await this.reader.ReadAsync())
+            {
+                var props = obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                foreach (var prop in props)
+                {
+                    prop.SetValue(obj, reader[prop.Name]);
+                }
+            }
+            return obj;
         }
     }
 }

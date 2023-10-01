@@ -17,9 +17,12 @@ namespace Api.Services
         {
             foreach (var typeRoleName in Enum.GetValues(typeof(ETypesRoles)))
             {
-                Console.WriteLine(typeRoleName.ToString().ToLower());
-                var typeRole = new TypesRoles(0, typeRoleName.ToString());
-                await this.typesRolesServices.Save(typeRole);
+                var exists = await this.typesRolesServices.CheckValueTypeNameExists(typeRoleName.ToString());
+                if(exists != true)
+                {
+                    var typeRole = new TypesRoles(0, typeRoleName.ToString());
+                    await this.typesRolesServices.Save(typeRole);
+                }   
             }
             
         }

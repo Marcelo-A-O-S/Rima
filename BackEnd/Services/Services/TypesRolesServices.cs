@@ -12,9 +12,9 @@ namespace Bussines.Services
 {
     public class TypesRolesServices : ITypesRolesServices
     {
-        private readonly TypesRolesRepository typesRolesRepository;
+        private readonly ITypesRolesRepository typesRolesRepository;
 
-        public TypesRolesServices(TypesRolesRepository typesRolesRepository)
+        public TypesRolesServices(ITypesRolesRepository typesRolesRepository)
         {
             this.typesRolesRepository = typesRolesRepository;
         }
@@ -42,6 +42,12 @@ namespace Bussines.Services
         {
             await this.typesRolesRepository.Delete(typesRoles);
             return "Deletado com sucesso!";
+        }
+
+        public async Task<bool> CheckValueTypeNameExists(string typeName)
+        {
+            var result = await this.typesRolesRepository.CheckPropertyValue(typeName, "typeName");
+            return result;
         }
     }
 }

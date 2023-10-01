@@ -19,6 +19,13 @@ namespace Domain.Entities
         {
 
         }
+        public Employees(int id, string firstName, string lastName)
+        {
+            this.id = id;
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
         public async Task GenerateCode()
         {
             this.code = new Guid().ToString();

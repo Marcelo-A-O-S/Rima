@@ -13,5 +13,15 @@ namespace Domain.Entities
         public int id { get; set; }
         public int employeeid { get; set; }
         public int roleid { get; set; }
+        public EmployeeRoles()
+        {
+
+        }
+        public EmployeeRoles(int id, int employeeid, int roleid)
+        {
+            this.id = id;
+            this.employeeid = employeeid;
+            this.roleid = roleid;
+        }
     }
 }

@@ -1,6 +1,7 @@
 using Api.Services;
 using Api.Services.Interfaces;
 using Bussines.Repository;
+using Bussines.Repository.IRepository;
 using Bussines.Services;
 using Bussines.Services.IServices;
 using Database.Connection;
@@ -23,19 +24,30 @@ builder.Services.AddSwaggerGen();
 //========================
 builder.Services.AddScoped<ICreateTypesRoles, CreateTypesRoles>();
 builder.Services.AddScoped<ICreateRoles, CreateRoles>();
+builder.Services.AddScoped<IInitializeUserAdmin, InitializeUserAdmin>();
+//======================
 
 //Bussines
 //Services
 //=============
 builder.Services.AddScoped<ITypesRolesServices, TypesRolesServices>();
 builder.Services.AddScoped<IRolesServices, RolesServices>();
+builder.Services.AddScoped<IEmployeesServices, EmployeesServices>();
+builder.Services.AddScoped<IEmployeesRolesServices, EmployeesRolesServices>();
+builder.Services.AddScoped<IUsersServices, UsersServices>();
+
 
 
 //Repository
 //============
-builder.Services.AddScoped<TypesRolesRepository>();
-builder.Services.AddScoped<RolesRepository>();
+builder.Services.AddScoped<ITypesRolesRepository,TypesRolesRepository>();
+builder.Services.AddScoped<IRolesRepository, RolesRepository>();
+builder.Services.AddScoped<IEmployeesRepository, EmployeesRepository>();
+builder.Services.AddScoped<IEmployeesRolesRepository, EmployeesRolesRepository>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+
 //===============
+
 //Database
 //Connection
 //================
@@ -43,6 +55,11 @@ builder.Services.AddScoped<IConnectionMySql, ConnectionMySql>();
 //Generics
 //=================
 builder.Services.AddScoped<IGenerics<TypesRoles>, Generics<TypesRoles>>();
+builder.Services.AddScoped<IGenerics<Roles>, Generics<Roles>>();
+builder.Services.AddScoped<IGenerics<Employees>, Generics<Employees>>();
+builder.Services.AddScoped<IGenerics<EmployeeRoles>, Generics<EmployeeRoles>>();
+builder.Services.AddScoped<IGenerics<Users>, Generics<Users>>();
+
 
 
 var app = builder.Build();
@@ -78,6 +95,8 @@ async Task createDatabase(WebApplication app)
         await typerolesservice.Create();
         var rolesServices = scope.ServiceProvider.GetService<ICreateRoles>();
         await rolesServices.Create();
+        var initializeAdmin = scope.ServiceProvider.GetService<IInitializeUserAdmin>();
+        await initializeAdmin.Create();
 
     }
 }

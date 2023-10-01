@@ -14,6 +14,8 @@ namespace Database.Generics.Interface
         Task<T> SearchById(int Id);
         Task<string> Delete(T entity);
         Task<bool> VerifyExistsById(int Id);
-        Task<bool> CheckPropertyValue(string verify, string NameProperty);
+        Task<bool> CheckPropertyValue(object verify, string NameProperty);
+        Task<T> FindBy(string NameProperty, object value);
+        
     }
 }

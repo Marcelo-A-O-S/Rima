@@ -13,13 +13,20 @@ namespace Domain.Entities
         [Key]
         public int id { get; set; }
         public int employeeid { get; set; }
-        public string passwordHash { get; set; }
-        public string passwordSalt { get; set; }
+        private string passwordHash { get; set; }
+        private string passwordSalt { get; set; }
         public string email { get; set; }
         public Users()
         {
 
         }
+        public Users(int id, int employeeid, string email)
+        {
+            this.id = id;
+            this.employeeid = employeeid;
+            this.email = email;
+        }
+
         public async Task createPasswordHash(string password)
         {
             using(var hmac = new HMACSHA256())
@@ -40,6 +47,14 @@ namespace Domain.Entities
                 var hash = Convert.FromBase64String(this.passwordHash);
                 return computedHash.SequenceEqual(hash);
             }
+        }
+        public async Task SetPasswordHash(string passwordHash)
+        {
+            this.passwordHash = passwordHash;
+        }
+        public async Task SetPasswordSalt(string passwordSalt)
+        {
+            this.passwordSalt = passwordSalt;
         }
     }
 }

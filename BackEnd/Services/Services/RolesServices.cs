@@ -1,4 +1,5 @@
 ﻿using Bussines.Repository;
+using Bussines.Repository.IRepository;
 using Bussines.Services.IServices;
 using Domain.Entities;
 using Domain.Enums;
@@ -12,16 +13,28 @@ namespace Bussines.Services
 {
     public class RolesServices : IRolesServices
     {
-        private readonly RolesRepository rolesRepository;
+        private readonly IRolesRepository rolesRepository;
 
-        public RolesServices(RolesRepository rolesRepository)
+        public RolesServices(IRolesRepository rolesRepository)
         {
             this.rolesRepository = rolesRepository;
+        }
+
+        public async Task<bool> CheckValueRoleNameExists(string roleName)
+        {
+            var result = await this.rolesRepository.CheckPropertyValue(roleName, "roleName");
+            return result;
         }
 
         public Task<string> Delete(Roles roles)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Roles> GetRoleByRoleName(string roleName)
+        {
+            Roles role = await this.rolesRepository.FindBy("roleName", roleName);
+            return role;
         }
 
         public async Task<string> Save(Roles roles)

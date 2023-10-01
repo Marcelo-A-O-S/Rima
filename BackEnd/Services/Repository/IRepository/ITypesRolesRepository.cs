@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bussines.Repository.IRepository
 {
-    public interface ITypesRolesRepository 
+    public interface ITypesRolesRepository : IGenerics<TypesRoles>
     {
     }
 }

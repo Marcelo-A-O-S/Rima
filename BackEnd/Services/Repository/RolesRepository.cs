@@ -1,4 +1,5 @@
-﻿using Database.Generics;
+﻿using Bussines.Repository.IRepository;
+using Database.Generics;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bussines.Repository
 {
-    public class RolesRepository : Generics<Roles>
+    public class RolesRepository : Generics<Roles>, IRolesRepository
     {
     }
 }

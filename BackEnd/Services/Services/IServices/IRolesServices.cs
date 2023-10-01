@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Bussines.Services.IServices
 {
-    public interface IRolesServices
+    public interface IRolesServices : IServices<Roles>
     {
-        Task<string> Save(Roles roles);
-        Task<string> Delete(Roles roles);
+        Task<bool> CheckValueRoleNameExists(string roleName);
+        Task<Roles> GetRoleByRoleName(string roleName);
     }
 }
