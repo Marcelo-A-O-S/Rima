@@ -23,6 +23,24 @@ namespace Bussines.Services
             throw new NotImplementedException();
         }
 
+        public async Task<List<EmployeeRoles>> GetAll()
+        {
+            List<EmployeeRoles> employeeRoles = await this.employeesRolesRepository.All();
+            return employeeRoles;
+        }
+
+        public async Task<List<EmployeeRoles>> GetByEmployeeId(int employeeid)
+        {
+            List<EmployeeRoles> employeeRoles = await this.employeesRolesRepository.FindAllBy("employeeid", employeeid);
+            return employeeRoles;
+        }
+
+        public async Task<EmployeeRoles> GetById(int id)
+        {
+            EmployeeRoles employeeRoles = await this.employeesRolesRepository.SearchById(id);
+            return employeeRoles;
+        }
+
         public async Task<string> Save(EmployeeRoles entity)
         {
             if(entity.id == 0)

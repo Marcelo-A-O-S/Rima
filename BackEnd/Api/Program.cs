@@ -25,6 +25,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICreateTypesRoles, CreateTypesRoles>();
 builder.Services.AddScoped<ICreateRoles, CreateRoles>();
 builder.Services.AddScoped<IInitializeUserAdmin, InitializeUserAdmin>();
+builder.Services.AddScoped<IJwtToken, JwtToken>();
 //======================
 
 //Bussines
@@ -76,7 +77,7 @@ if (app.Environment.IsProduction())
 {
 
 }
-
+app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

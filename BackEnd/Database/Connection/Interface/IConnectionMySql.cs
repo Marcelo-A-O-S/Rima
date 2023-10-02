@@ -14,5 +14,6 @@ namespace Database.Connection.Interface
         Task<string> ReturnUniqueReaderData();
         Task ReturnListOfReaderData();
         Task<T> FilterReaderObject<T>();
+        Task<List<T>> FilterReaderListObject<T>();
     }
 }

@@ -187,7 +187,15 @@ namespace Database.Connection
         }
         public string QuerySelectByProperty(string Table, string property, string value)
         {
-            return String.Format("Select * from {0} where {1} = {2};",Table,property,value);
+            return String.Format("Select * from {0} where {1} = {2} limit 1;",Table,property,value);
+        }
+        public string QuerySelectAllByProperty(string table, string property, string value)
+        {
+            return String.Format("Select * from {0} where {1} = {2};", table, property, value);
+        }
+        public string QuerySelectById(string table, string id)
+        {
+            return String.Format("Select * from {0} where id = {1} limit 1", table, id);
         }
         public Task ReturnListOfReaderData()
         {
@@ -209,6 +217,23 @@ namespace Database.Connection
                 }
             }
             return obj;
+        }
+        public async Task<List<T>> FilterReaderListObject<T>()
+        {
+            Type type = typeof(T);
+            
+            var listObj = new List<T>();
+            while(await this.reader.ReadAsync())
+            {
+                var obj = (T)Activator.CreateInstance(type);
+                var props = obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                foreach (var prop in props)
+                {
+                    prop.SetValue(obj, reader[prop.Name]);
+                }
+                listObj.Add(obj);
+            }
+            return listObj;
         }
     }
 }

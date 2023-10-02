@@ -21,15 +21,17 @@ namespace Database.Generics
         {
             Type type = typeof(T);
             var objCurrent = (T)Activator.CreateInstance(type);
+            var table = objCurrent.GetType().Name.ToLower();
             
-            var objlist = new List<T>();
             var conn = new ConnectionMySql();
-            string command = conn.QuerySelectAll(objCurrent.GetType().Name.ToLower());
+            string command = conn.QuerySelectAll(table);
             await conn.Init();
             await conn.InsertCommand(command);
             await conn.ExecuteReaderQuery();
-            
-            throw new NotImplementedException();
+            var objlist = await conn.FilterReaderListObject<T>();
+            await conn.CommandClose();
+            await conn.ConnectClose();
+            return objlist;
         }
 
         public async Task<bool> CheckPropertyValue(object verify, string NameProperty)
@@ -75,6 +77,32 @@ namespace Database.Generics
         {
             Type type = typeof(T);
             throw new NotImplementedException();
+        }
+
+        public async Task<List<T>> FindAllBy(string NameProperty, object value)
+        {
+            Type type = typeof(T);
+            var valueString = "";
+            var obj = (T)Activator.CreateInstance(type);
+            var table = obj.GetType().Name.ToLower();
+            var property = obj.GetType().GetProperty(NameProperty, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (value.GetType() == typeof(string))
+            {
+                valueString = String.Format("'{0}'", value.ToString());
+            }
+            if (value.GetType() == typeof(int))
+            {
+                valueString = String.Format("{0}", value.ToString());
+            }
+            var conn = new ConnectionMySql();
+            await conn.Init();
+            var command = conn.QuerySelectAllByProperty(table,property.Name,valueString);
+            await conn.InsertCommand(command);
+            await conn.ExecuteReaderQuery();
+            var list = await conn.FilterReaderListObject<T>();
+            await conn.CommandClose();
+            await conn.ConnectClose();
+            return list;
         }
 
         public async Task<T> FindBy(string NameProperty, object value)
@@ -148,9 +176,21 @@ namespace Database.Generics
             
         }
 
-        public Task<T> SearchById(int Id)
+        public async Task<T> SearchById(int Id)
         {
-            throw new NotImplementedException();
+            Type type = typeof(T);
+            var obj = (T)Activator.CreateInstance(type);
+            var conn = new ConnectionMySql();
+            var table = obj.GetType().Name.ToLower();
+            var command = conn.QuerySelectById(table, Id.ToString());
+            await conn.Init();
+            await conn.InsertCommand(command);
+            await conn.ExecuteReaderQuery();
+            obj = await conn.FilterReaderObject<T>();
+            await conn.CommandClose();
+            await conn.ConnectClose();
+            return obj;
+
         }
 
         public Task<string> Update(T entity)

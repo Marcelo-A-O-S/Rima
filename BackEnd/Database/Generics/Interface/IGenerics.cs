@@ -16,6 +16,7 @@ namespace Database.Generics.Interface
         Task<bool> VerifyExistsById(int Id);
         Task<bool> CheckPropertyValue(object verify, string NameProperty);
         Task<T> FindBy(string NameProperty, object value);
+        Task<List<T>> FindAllBy(string NameProperty, object value);
         
     }
 }

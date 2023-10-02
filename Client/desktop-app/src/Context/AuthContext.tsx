@@ -2,6 +2,7 @@ import React, {createContext , useState , useEffect} from "react";
 import { User } from "../Models/User";
 import {IUser} from "../Models/Interfaces/IUser";
 import { useNavigate } from "react-router-dom";
+import jwt from 'jsonwebtoken'
 
 interface AuthUser {
     user: IUser | null,
@@ -25,6 +26,10 @@ export const AuthProvider = ({ children }: any) => {
         async function VerificarAutenticacao(){
             const UserStorage = localStorage.getItem("user");
             if(UserStorage){
+                var secret = process.env.REACT_APP_JWTTOKEN;
+                if(secret !== undefined){
+
+                }
                 setUser(JSON.parse(UserStorage));
                 setSigned(true);
                 navigate("/Signed");
@@ -41,6 +46,7 @@ export const AuthProvider = ({ children }: any) => {
     async function SignIn(BodyUser:User){
         setUser(BodyUser);
         setSigned(true);
+
         localStorage.setItem("user", JSON.stringify(BodyUser))
 
     }
@@ -50,6 +56,9 @@ export const AuthProvider = ({ children }: any) => {
         localStorage.removeItem("user")
         localStorage.clear()
 
+    }
+    async function GetToken(){
+        localStorage.getItem("token")
     }
     return(
         <AuthContext.Provider value={{ signed: signed, user: user, SignIn, VerificarUsuario, SignOut }}>

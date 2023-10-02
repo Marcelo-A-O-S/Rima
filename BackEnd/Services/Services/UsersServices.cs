@@ -22,6 +22,24 @@ namespace Bussines.Services
             throw new NotImplementedException();
         }
 
+        public async Task<List<Users>> GetAll()
+        {
+            List<Users> users = await this.usersRepository.All();
+            return users;
+        }
+
+        public async Task<Users> GetByEmail(string email)
+        {
+            Users user = await this.usersRepository.FindBy("email", email);
+            return user;
+        }
+
+        public async Task<Users> GetById(int id)
+        {
+            Users user = await this.usersRepository.SearchById(id);
+            return user;
+        }
+
         public async Task<string> Save(Users entity)
         {
             if (entity.id == 0)

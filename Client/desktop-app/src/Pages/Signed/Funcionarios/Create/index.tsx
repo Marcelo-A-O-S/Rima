@@ -5,6 +5,7 @@ import Form from "./components/Form"
 import InputText from "./components/InputText"
 import MultiSelect from "./components/MultiSelect"
 import Box from "./components/Box"
+import AuthContext from "../../../../Context/AuthContext"
 interface SelectValue{
     value:string,
     label:string
@@ -19,12 +20,15 @@ interface EmployeeCreate{
 }
 export default function RegisterEmployee(){
     const { themeCurrent } = useContext(ThemeDarkContext)
+    const {user} = useContext(AuthContext);
     const [data, setData ] = useState<any[]>([])
     const [selectValue, setSelectValue ] = useState([])
     const [ create, setCreate ] = useState<EmployeeCreate>({} as EmployeeCreate)
     const [ enableUser, setEnableUser ] = useState(true);
     useEffect(()=>{
-        fetch('http://localhost:4073/roles').then((res)=>res.json()).then((array:any[])=> {
+
+        fetch('https://localhost:7205/api/Roles/GetRoles',{
+        }).then((res)=>res.json()).then((array:any[])=> {
             const optionList = array.map(item => ({ value: { roleName: item.roleName , typeid: item.typeid }, label: item.roleName }));
             setData(optionList);
         })

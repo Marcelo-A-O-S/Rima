@@ -31,6 +31,18 @@ namespace Bussines.Services
             throw new NotImplementedException();
         }
 
+        public async Task<List<Roles>> GetAll()
+        {
+            List<Roles> roles = await this.rolesRepository.All();
+            return roles;
+        }
+
+        public async Task<Roles> GetById(int id)
+        {
+            Roles role = await this.rolesRepository.SearchById(id);
+            return role;
+        }
+
         public async Task<Roles> GetRoleByRoleName(string roleName)
         {
             Roles role = await this.rolesRepository.FindBy("roleName", roleName);

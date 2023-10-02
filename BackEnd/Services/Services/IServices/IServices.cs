@@ -10,5 +10,7 @@ namespace Bussines.Services.IServices
     {
         Task<string> Save(T entity);
         Task<string> Delete(T entity);
+        Task<T> GetById(int id);
+        Task<List<T>> GetAll();
     }
 }

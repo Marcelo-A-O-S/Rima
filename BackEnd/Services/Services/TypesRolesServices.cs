@@ -49,5 +49,17 @@ namespace Bussines.Services
             var result = await this.typesRolesRepository.CheckPropertyValue(typeName, "typeName");
             return result;
         }
+
+        public async Task<TypesRoles> GetById(int id)
+        {
+            TypesRoles typeRole = await this.typesRolesRepository.SearchById(id);
+            return typeRole;
+        }
+
+        public async Task<List<TypesRoles>> GetAll()
+        {
+            List<TypesRoles> typesRoles = await this.typesRolesRepository.All();
+            return typesRoles;
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace Bussines.Services.IServices
     public interface IUsersServices : IServices<Users>
     {
         Task<bool> verifyEmailExists(string email);
+        Task<Users> GetByEmail(string email);
     }
 }
