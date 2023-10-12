@@ -1,2 +1,6 @@
 /Api/.vs
 Api/.vs
+Api/appsettings.json
+Api/appsettings.Development.json
+/Api/appsettings.json
+/Api/appsettings.Development.json
