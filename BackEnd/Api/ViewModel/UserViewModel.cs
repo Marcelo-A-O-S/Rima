@@ -7,6 +7,7 @@ namespace Api.ViewModel
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string email { get; set; }
+        public string token { get; set; }
         public List<Roles> roles { get; set; }
     }
 }

@@ -33,7 +33,7 @@ id int primary key auto_increment not null,
 employeeid int not null,
 email varchar(60) not null,
 passwordHash varchar(255) not null,
-passwordSalt varchar(70) not null,
+passwordSalt varchar(255) not null,
 foreign key(employeeid) references databasemysql.employees(id) on update cascade on delete cascade
 );
 
@@ -57,3 +57,4 @@ select * from databasemysql.users;
 
 select case when count(*) > 0 then "True" else "False" end as resultado from databasemysql.employees where lastName = "Adiministrador"; 
 
+SELECT *  FROM databasemysql.typesroles where id like '%1%';

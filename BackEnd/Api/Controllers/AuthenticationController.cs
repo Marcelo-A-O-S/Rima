@@ -1,4 +1,5 @@
-﻿using Api.ViewModel;
+﻿using Api.Services.Interfaces;
+using Api.ViewModel;
 using Bussines.Services.IServices;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -14,18 +15,21 @@ namespace Api.Controllers
         private readonly IEmployeesRolesServices employeesRolesServices;
         private readonly IEmployeesServices employeesServices;
         private readonly IRolesServices rolesServices;
+        private readonly IJwtToken token;
 
         public AuthenticationController(
             IUsersServices usersServices, 
             IEmployeesRolesServices employeesRolesServices,
             IEmployeesServices employeesServices,
-            IRolesServices rolesServices
+            IRolesServices rolesServices,
+            IJwtToken token
             )
         {
             this.usersServices = usersServices;
             this.employeesRolesServices = employeesRolesServices;
             this.employeesServices = employeesServices;
             this.rolesServices = rolesServices;
+            this.token = token;
         }
         [HttpPost, Route("Login")]
         public async Task<ActionResult> Login(LoginViewModel login)
@@ -52,6 +56,7 @@ namespace Api.Controllers
                         userview.firstName = employee.firstName;
                         userview.lastName = employee.lastName;
                         userview.email = user.email;
+                        userview.token = await token.CreateJwtTokenAsync(userview);
                         return Ok(userview);
 
                     }

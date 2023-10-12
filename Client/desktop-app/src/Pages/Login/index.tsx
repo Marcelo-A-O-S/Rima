@@ -3,11 +3,13 @@ import Logo from '../../Assets/LogoEmpresa 1.svg'
 import Style from '../Login/login.module.css'
 import LoginView from '../../ViewModel/LoginView'
 import ButtonTheme from '../../Components/ButtonTheme'
+import { ApiBackEnd } from '../../Api/Api'
 import { User } from '../../Models/User'
 import { Roles } from '../../Models/Roles'
 import AuthContext from '../../Context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { ThemeDarkContext } from '../../Context/ThemeContext'
+import { AxiosResponse } from 'axios'
 export default function Login() {
   const user = new User();
   const {themeCurrent} = useContext(ThemeDarkContext)
@@ -21,11 +23,12 @@ export default function Login() {
     e.target.value = "";
   }
 
-  async function UserResponse( response: Response){
-    return await response.json().then(async (data)=>{
+  async function UserResponse( response:  AxiosResponse<any, any>){
+     const data = response.data;
       user.email = data.email;
       user.firstName = data.firstName;
       user.lastName = data.lastName;
+      user.token = data.token;
       data.roles.forEach((element: any) =>
         {
           const role = new Roles();
@@ -35,16 +38,12 @@ export default function Login() {
         }
       );
       return user;
-    })
+
   }
   async function SubmitLogin(e:any){
     e.preventDefault();
-    const response = await fetch("https://localhost:7205/api/Authentication/Login",{
-      method:"POST",
-      headers:{
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(login)
+    const response = await ApiBackEnd.post('/Authentication/Login',{
+      login
     })
 
     const status = response.status;
@@ -56,15 +55,13 @@ export default function Login() {
         navigate('/Signed');
 
     }
-    if(status === 401)
-     await response.json().then((data)=> {
-      console.log(data);
-      alert(data);
-    })
+    if(status === 401){
+      console.log(response.data);
+      alert(response.data);
+    }
     if(status === 404){
-      await response.json().then((data)=>{
-        alert(data);
-      })
+      console.log(response.data);
+      alert(response.data);
     }
 
   }

@@ -59,3 +59,10 @@ C:\Rima\BackEnd\Api\bin\Debug\net6.0\Bussines.dll
 C:\Rima\BackEnd\Api\bin\Debug\net6.0\Domain.dll
 C:\Rima\BackEnd\Api\bin\Debug\net6.0\Bussines.pdb
 C:\Rima\BackEnd\Api\bin\Debug\net6.0\Domain.pdb
+C:\Rima\BackEnd\Api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Rima\BackEnd\Api\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Rima\BackEnd\Api\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Rima\BackEnd\Api\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Rima\BackEnd\Api\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Rima\BackEnd\Api\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Rima\BackEnd\Api\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

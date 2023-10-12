@@ -1,9 +1,10 @@
-﻿using Domain.Entities;
+﻿using Api.ViewModel;
+using Domain.Entities;
 
 namespace Api.Services.Interfaces
 {
     public interface IJwtToken
     {
-        Task<string> CreateJwtTokenAsync(Users user);    
+        Task<string> CreateJwtTokenAsync(UserViewModel user);    
     }
 }
