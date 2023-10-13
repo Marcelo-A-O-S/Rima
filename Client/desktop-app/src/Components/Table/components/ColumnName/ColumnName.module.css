@@ -1,0 +1,7 @@
+.main{
+    width: auto;
+    display: flex;
+    padding: 10px;
+    flex-wrap: nowrap;
+    text-wrap: nowrap;
+}

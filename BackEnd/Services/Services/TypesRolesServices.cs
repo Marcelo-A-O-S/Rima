@@ -61,5 +61,11 @@ namespace Bussines.Services
             List<TypesRoles> typesRoles = await this.typesRolesRepository.All();
             return typesRoles;
         }
+
+        public async Task<TypesRoles> GetByTypeName(string typeName)
+        {
+            TypesRoles typeRole = await this.typesRolesRepository.FindBy('typeName', typeName);
+            return typeRole;
+        }
     }
 }

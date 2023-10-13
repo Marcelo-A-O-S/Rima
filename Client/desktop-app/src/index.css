@@ -24,7 +24,8 @@ main{
   margin: 0px;
   height: 100vh;
   position: relative;
-  top:45px
+  top:45px;
+  width: min(66%,1000px);
 }
 
 a{

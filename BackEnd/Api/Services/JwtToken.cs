@@ -31,8 +31,9 @@ namespace Api.Services
             var credential = new SigningCredentials(keyjwt,SecurityAlgorithms.HmacSha256Signature);
             var jwt = new JwtSecurityToken(
                 claims: claims,
-                signingCredentials: credential
-                );
+                signingCredentials: credential,
+                expires: DateTime.Now.AddHours(8)
+                ) ;
             var token = new JwtSecurityTokenHandler().WriteToken(jwt);
             return token;
         }

@@ -38,15 +38,15 @@ export default function HeaderDrop(){
                 {
                     imgIcon: ImgAddFunc,
                     link:"funcionarios/create",
-                    textlink:"Registrar Funcionário",
+                    textlink:"Gerenciar Funcionários",
                     state:undefined,
                     onChance:undefined,
                     item:undefined
                 },
                 {
                     imgIcon: ImgListFunc,
-                    link:"funcionarios/create",
-                    textlink:"Listar Funcionários",
+                    link:"funcionarios/managerRole",
+                    textlink:"Gerenciar Funções",
                     state:undefined,
                     onChance:undefined,
                     item:undefined

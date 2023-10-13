@@ -2,7 +2,7 @@ import { ReactNode } from "react"
 import Style from './Form.module.css'
 interface IForm{
     children:ReactNode,
-    onSubmit?():void,
+    onSubmit?(e:React.FormEvent<HTMLFormElement>): Promise<void>,
     border?:boolean,
     vertical?:boolean
 }

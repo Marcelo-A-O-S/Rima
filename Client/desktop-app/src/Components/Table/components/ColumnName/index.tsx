@@ -1,9 +1,10 @@
+import Style from './ColumnName.module.css'
 interface IColumn{
     name:String
 }
 
 export default function ColumnName(props: IColumn){
     return(
-        <td>{props.name}</td>
+        <td className={Style.main}>{props.name}</td>
     )
 }

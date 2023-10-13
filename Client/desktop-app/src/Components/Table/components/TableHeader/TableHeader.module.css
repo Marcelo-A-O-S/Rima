@@ -1,0 +1,14 @@
+.border{
+
+    border-style: solid;
+}
+.expand{
+    width: 100%;
+}
+.main{
+    display: flex;
+    flex-wrap: nowrap;
+    display: flex;
+
+    justify-content: space-around;
+}

@@ -42,26 +42,33 @@ export default function Login() {
   }
   async function SubmitLogin(e:any){
     e.preventDefault();
-    const response = await ApiBackEnd.post('/Authentication/Login',{
-      login
-    })
+    try{
+      const response = await ApiBackEnd.post('/Authentication/Login',{
+        email: login.email,
+        password: login.password
+      })
 
-    const status = response.status;
-    if(status === 200){
-        const user = await UserResponse(response)
-        console.log(user);
-        console.log("Acessando serviços");
-        await SignIn(user);
-        navigate('/Signed');
-
-    }
-    if(status === 401){
-      console.log(response.data);
-      alert(response.data);
-    }
-    if(status === 404){
-      console.log(response.data);
-      alert(response.data);
+      const status = response.status;
+      if(status === 200){
+          const user = await UserResponse(response)
+          console.log("Acessando serviços");
+          await SignIn(user);
+          navigate('/Signed');
+      }
+      if(status === 400){
+        console.log(response.data);
+        alert(response.data);
+      }
+      if(status === 401){
+        console.log(response.data);
+        alert(response.data);
+      }
+      if(status === 404){
+        console.log(response.data);
+        alert(response.data);
+      }
+    }catch(err){
+      console.log(err)
     }
 
   }

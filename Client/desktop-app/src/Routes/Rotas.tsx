@@ -13,6 +13,8 @@ import RegisterEmployee from '../Pages/Signed/Funcionarios/Create'
 import ListEmployee from '../Pages/Signed/Funcionarios/List'
 import { HamburguerProvider } from '../Context/HamburguerContext'
 import { BellProvider } from '../Context/BellContext'
+import ManageRoles from '../Pages/Signed/Funcionarios/ManageRoles'
+
 
 export default function Rotas() {
   return (
@@ -39,6 +41,7 @@ export default function Rotas() {
                 <Route path="funcionarios" >
                     <Route index element={<ListEmployee/>}/>
                     <Route path='create' element={<RegisterEmployee/>}/>
+                    <Route path='managerRole' element={<ManageRoles/>}/>
                 </Route>
               </Route>
           </Routes>

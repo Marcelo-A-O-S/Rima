@@ -6,6 +6,7 @@ import InputText from "./components/InputText"
 import MultiSelect from "./components/MultiSelect"
 import Box from "./components/Box"
 import AuthContext from "../../../../Context/AuthContext"
+import { ApiBackPrivate } from "../../../../Api/Api"
 interface SelectValue{
     value:string,
     label:string
@@ -26,12 +27,22 @@ export default function RegisterEmployee(){
     const [ create, setCreate ] = useState<EmployeeCreate>({} as EmployeeCreate)
     const [ enableUser, setEnableUser ] = useState(true);
     useEffect(()=>{
+        if(user !== null){
 
-        fetch('https://localhost:7205/api/Roles/GetRoles',{
-        }).then((res)=>res.json()).then((array:any[])=> {
-            const optionList = array.map(item => ({ value: { roleName: item.roleName , typeid: item.typeid }, label: item.roleName }));
-            setData(optionList);
-        })
+            const api = ApiBackPrivate(user)
+            api.get("/Roles/GetRoles")
+            .then(response => {
+                console.log(response.data)
+                const data:any[] = response.data;
+                const optionList = data.map(item =>
+                    ({ value: { roleName: item.roleName , typeid: item.typeid }, label: item.roleName })
+                    );
+                setData(optionList);
+            })
+            .catch(err=>{
+                console.log(err);
+            });
+        }
     },[])
     useEffect(()=>{
     },[create])
@@ -84,7 +95,8 @@ export default function RegisterEmployee(){
                     name="Funções: "
                     value={selectValue}
                     onChange={setSelectValue}
-                    placeholder="Selecione as funções do funcionário"/>
+                    placeholder="Selecione as funções do funcionário"
+                    isMulti={true}/>
                     </Box>
                     <Box vertical={true} border={false} expand={true}>
                     <InputText
@@ -118,7 +130,9 @@ export default function RegisterEmployee(){
             </Form>
             <Box vertical={true} border={true} padding="medium">
                 <Box vertical={true} border={true} padding="none">
+                        <div>
 
+                        </div>
                 </Box>
             </Box>
         </main>

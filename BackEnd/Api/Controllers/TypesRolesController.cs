@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Api.ViewModel.TypeRole;
+using Bussines.Services.IServices;
+using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -7,14 +11,39 @@ namespace Api.Controllers
     [ApiController]
     public class TypesRolesController : ControllerBase
     {
-        public TypesRolesController()
-        {
+        private readonly ITypesRolesServices typesRolesServices;
 
+        public TypesRolesController(ITypesRolesServices typesRolesServices)
+        {
+            this.typesRolesServices = typesRolesServices;
         }
-        [HttpGet]
+        [Authorize]
+        [HttpGet, Route("GetTypes")]
         public async Task<ActionResult> GetAll()
         {
-            return Ok();
+            try
+            {
+                var list = await this.typesRolesServices.GetAll();
+                return Ok(list);
+            }
+            catch(Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+        }
+        [Authorize]
+        [HttpPost, Route("CreateType")]
+        public async Task<ActionResult> Create(TypeRoleView request)
+        {
+            try
+            {
+                
+                return Ok();
+            }
+            catch(Exception err)
+            {
+                return BadRequest(err.Message);
+            }
         }
     }
 }

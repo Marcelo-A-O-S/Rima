@@ -1,22 +1,30 @@
 import AuthContext from "../../../Context/AuthContext";
 import { ThemeDarkContext } from "../../../Context/ThemeContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Style from './Dashboard.module.css'
 import jwt from 'jsonwebtoken'
+import jwt_decode from "jwt-decode";
 import { IUser } from "../../../Models/Interfaces/IUser";
+import { AnyAaaaRecord } from "dns";
 export default function Dashboard(){
     const {themeCurrent } = useContext(ThemeDarkContext)
     const { user } = useContext(AuthContext)
-    let iuser : IUser;
+    const [ userPerfil, setUserPerfil] = useState<IUser>({} as IUser);
     useEffect(()=>{
         const token = user?.token;
-        console.log(token);
         const secret = process.env.REACT_APP_JWTTOKEN;
-        console.log(secret);
         if(token !== undefined && secret !== undefined){
             try {
-                //const decode = jwt.verify(token, secret);
-                //console.log(decode);
+
+                const decode: any = jwt_decode(token);
+                console.log(decode);
+                setUserPerfil(prev =>{
+                    return {
+                        ...prev,
+                        firstName : decode.firstName,
+                        lastName : decode.lastName,
+                    }
+                })
               } catch (error) {
                 console.error('Erro ao verificar o token JWT:', error);
               }
@@ -27,7 +35,7 @@ export default function Dashboard(){
     return(
     <main className={`${Style.main} ${themeCurrent}`}>
         <div >
-            <h4 className={Style.title}>Olá {user?.roles[0].roleName}  {user?.firstName} {user?.lastName}!</h4>
+            <h4 className={Style.title}>Olá {user?.roles[0].roleName}  {userPerfil.firstName} {userPerfil.lastName}!</h4>
         </div>
     </main>)
 }

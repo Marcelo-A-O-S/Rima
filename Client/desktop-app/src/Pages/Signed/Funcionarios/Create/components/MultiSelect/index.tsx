@@ -6,6 +6,7 @@ interface IMultiSelect{
     placeholder:string,
     options?:any[],
     value?:any,
+    isMulti: boolean,
     onChange?(newValue:any): void,
     loadOptions?():Promise<any[]>
 }
@@ -26,7 +27,7 @@ export default function MultiSelect(props: IMultiSelect){
                     props.onChange(value)
                 }
             }}
-            isMulti/>
+            isMulti ={props.isMulti}/>
         </div>
     )
 }

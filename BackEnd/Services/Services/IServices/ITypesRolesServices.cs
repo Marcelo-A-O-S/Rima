@@ -11,5 +11,6 @@ namespace Bussines.Services.IServices
     {
         
         Task<bool> CheckValueTypeNameExists(string typeName);
+        Task<TypesRoles> GetByTypeName(string typeName);
     }
 }
