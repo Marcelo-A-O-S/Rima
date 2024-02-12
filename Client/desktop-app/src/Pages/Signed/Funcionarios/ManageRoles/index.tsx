@@ -114,7 +114,7 @@ export default function ManageRoles(){
                         <TableHeader expand={false} border={false} >
                             <ColumnName name={" Nome da função "}/>
                             <ColumnName name={" Tipo de função "}/>
-
+ 
                         </TableHeader>
                         <TableBody>
                             <ColumnValue value={"teste"}/>

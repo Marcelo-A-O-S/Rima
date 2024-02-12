@@ -1,5 +1,6 @@
 ﻿using Api.Services.Interfaces;
 using Api.ViewModel;
+using Api.ViewModel.Authentication;
 using Bussines.Services.IServices;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
